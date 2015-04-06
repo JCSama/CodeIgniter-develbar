@@ -1,5 +1,5 @@
-<img src="<?php echo $icon ?>"
-     alt="Views"/> <?php echo lang('views') . ' (' . count($views) . ')' ?>
+<img src="<?php echo $icon ?>" title="<?php echo lang('views') ?>"
+     alt="<?php echo lang('views') ?>"/> <?php echo lang('views') . ' (' . count($views) . ')' ?>
 <?php if(count($views)): ?>
 <div class="detail views">
     <div class="scroll">

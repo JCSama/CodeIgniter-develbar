@@ -25,7 +25,7 @@ $config['documentation_link'] = 'http://www.codeigniter.com/userguide3/';
 
 $config['ci_website'] = 'http://www.codeigniter.com';
 
-$config['ci_download_linked'] = 'http://www.codeigniter.com/download';
+$config['ci_download_link'] = 'http://www.codeigniter.com/download';
 
 $config['ci_update_uri'] = 'https://raw.githubusercontent.com/bcit-ci/CodeIgniter/develop/system/core/CodeIgniter.php';
 

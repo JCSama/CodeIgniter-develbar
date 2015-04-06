@@ -1,5 +1,5 @@
-<img src="<?php echo $icon ?>"
-     alt="Helpers"/> <?php echo lang('helpers') . ' (' . count($helpers) . ')' ?>
+<img src="<?php echo $icon ?>" title="<?php echo lang('helpers') ?>"
+     alt="<?php echo lang('helpers') ?>"/> <?php echo lang('helpers') . ' (' . count($helpers) . ')' ?>
 <?php if(count($helpers)): ?>
 <div class="detail">
     <div class="scroll">

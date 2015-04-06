@@ -1,5 +1,5 @@
-<img src="<?php echo $icon ?>"
-     alt="Hooks"/> <?php echo($total_hooks > 0 ? lang('hooks') . ' (' . $total_hooks . ')' : 'N/A') ?>
+<img src="<?php echo $icon ?>" title="<?php echo lang('hooks') ?>"
+     alt="<?php echo lang('hooks') ?>"/> <?php echo($total_hooks > 0 ? lang('hooks') . ' (' . $total_hooks . ')' : 'N/A') ?>
 <?php if(count($loaded_hooks)): ?>
 <div class="detail hooks">
     <div class="scroll">

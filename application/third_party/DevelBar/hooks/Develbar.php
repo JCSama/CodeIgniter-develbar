@@ -103,7 +103,6 @@ class DevelBar
      */
     public function debug()
     {
-
         if ($this->CI->input->is_cli_request() || $this->CI->input->is_ajax_request()) {
             $this->CI->output->_display();
 
@@ -140,10 +139,11 @@ class DevelBar
             'ci_version' => CI_VERSION,
             'develBar_version' => self::VERSION,
             'sections' => $this->default_options['develbar_sections'],
-            'ci_new_version' => $this->default_options['check_update'] == true ? check_for_new_version() : false,
+            'ci_new_version' => $this->default_options['check_update'] === true ? check_for_new_version($this->default_options['ci_update_uri']) : false,
             'css' => $this->CI->load->file($this->assets_folder . 'css/develbar.css', true),
             'logo' => image_base64_encode($this->assets_folder . 'images/ci.png'),
             'views' => $this->views,
+            'config' => $this->default_options,
         );
 
         return $this->CI->load->view($this->view_folder . 'develbar', $data, true);
@@ -392,7 +392,7 @@ class DevelBar
     {
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/session.png'),
-            'session' => $this->CI->session->userdata()
+            'session' => isset($this->CI->session) ? $this->CI->session->userdata() : array()
         );
 
         return $this->CI->load->view($this->view_folder . 'session', $data, true);

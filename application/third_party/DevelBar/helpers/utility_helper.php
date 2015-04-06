@@ -15,9 +15,8 @@ if (!function_exists('image_base64_encode')) {
 // ------------------------------------------------------------------------
 
 if (!function_exists('check_for_new_version')) {
-    function check_for_new_version()
+    function check_for_new_version($url)
     {
-        $url = config_item('ci_update_uri');
         if(!$ci_version = file_get_contents($url))
             return FALSE;
 

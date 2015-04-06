@@ -4,18 +4,18 @@
 </style>
 <div class="develbar">
     <ul class="develbar-nav">
-        <li class="none"><img src="<?php echo $logo ?>" alt="codeIgniter" />
+        <li class="none"><img src="<?php echo $logo ?>" alt="CodeIgniter" />
             <div class="detail">
-                <p>CodeIgniter version : <?php echo $ci_version ?></p>
+                <p><?php echo sprintf(lang('ci_version'), $ci_version) ?></p>
                 <?php if($ci_new_version !== FALSE): ?>
                     <p>
-                    <span class="label warning">Info</span>Update is available to <?php echo anchor(config_item('ci_download_link'), $ci_new_version, 'target="_blank"') ?>
+                    <span class="label warning"><?php echo lang('info') ?></span>
+                        <?php echo sprintf(lang('update_message'), anchor($config['ci_download_link'], $ci_new_version, 'target="_blank"')) ?>
                     </p>
                 <?php endif ?>
-                <p><?php echo anchor(config_item('documentation_link'), 'CodeIgniter documentation', 'target="_blank"') ?></p>
-                <p>DevelBar version : <?php echo $develBar_version ?></p>
-                <p>PHP version : <?php echo PHP_VERSION ?></p>
-
+                <p><?php echo anchor($config['documentation_link'], 'CodeIgniter documentation', 'target="_blank"') ?></p>
+                <p><?php echo sprintf(lang('develbar_version'), $develBar_version) ?></p>
+                <p><?php echo sprintf(lang('php_version'), PHP_VERSION) ?></p>
             </div>
         </li>
         <?php if(count($views)): ?>
