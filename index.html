@@ -38,27 +38,27 @@
 
 <p>Open <code>application/config/autoload.php</code> :</p>
 
-<pre><code>`$autoload['packages'] = array(APPPATH . 'third_party/DevelBar');`
+<pre><code>  $autoload['packages'] = array(APPPATH . 'third_party/DevelBar');
 </code></pre>
 
 <p>Open <code>application/config/config.php</code> :</p>
 
-<pre><code>`$config['enable_hooks'] = TRUE;`
+<pre><code>  $config['enable_hooks'] = TRUE;
 </code></pre>
 
 <p>Open <code>application/config/hooks.php</code> and add this line :</p>
 
-<pre><code>`$hook['display_override'][] = array(`
-`'class'    =&gt; 'Develbar',`
-    `'function'     =&gt; 'debug',`
-    `'filename'     =&gt; 'Develbar.php',`
-    `'filepath'     =&gt; 'third_party/DevelBar/hooks'`
-`);`
+<pre><code>  $hook['display_override'][] = array(
+     'class'    =&gt; 'Develbar',
+     'function'     =&gt; 'debug',
+     'filename'     =&gt; 'Develbar.php',
+     'filepath'     =&gt; 'third_party/DevelBar/hooks'
+  );
 </code></pre>
 
 <p>Open <code>application/third_party/DevelBar/config/config.php</code> :</p>
 
-<pre><code>`$config['enable_develbar'] = TRUE;`
+<pre><code>  $config['enable_develbar'] = TRUE;
 </code></pre>
 
       <footer class="site-footer">
