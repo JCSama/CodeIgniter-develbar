@@ -29,6 +29,10 @@ $config['ci_download_link'] = 'http://www.codeigniter.com/download';
 
 $config['ci_update_uri'] = 'https://raw.githubusercontent.com/bcit-ci/CodeIgniter/develop/system/core/CodeIgniter.php';
 
+$config['develbar_update_uri'] = 'https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/master/version.json';
+
+$config['develbar_download_link'] = 'https://github.com/JCSama/CodeIgniter-develbar';
+
 /*
 |--------------------------------------------------------------------------
 | Debug Sections

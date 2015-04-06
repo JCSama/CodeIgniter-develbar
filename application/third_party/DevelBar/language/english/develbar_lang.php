@@ -24,3 +24,4 @@ $lang['info'] = 'Info';
 $lang['update_message'] = 'Update is available to %s';
 $lang['develbar_version'] = 'DevelBar version : %s';
 $lang['php_version'] = 'PHP version : %s';
+$lang['default_language'] = 'Default language : %s';
