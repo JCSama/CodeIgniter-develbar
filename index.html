@@ -38,24 +38,28 @@
 
 <p>Open <code>application/config/autoload.php</code> :</p>
 
-<p><code>$autoload['packages'] = array(APPPATH . 'third_party/DevelBar');</code></p>
+<pre><code>`$autoload['packages'] = array(APPPATH . 'third_party/DevelBar');`
+</code></pre>
 
 <p>Open <code>application/config/config.php</code> :</p>
 
-<p><code>$config['enable_hooks'] = TRUE;</code></p>
+<pre><code>`$config['enable_hooks'] = TRUE;`
+</code></pre>
 
 <p>Open <code>application/config/hooks.php</code> and add this line :</p>
 
-<p>$hook['display_override'][] = array(
-    'class'     =&gt; 'Develbar',
-    'function'  =&gt; 'debug',
-    'filename'  =&gt; 'Develbar.php',
-    'filepath'  =&gt; 'third_party/DevelBar/hooks'
-);</p>
+<pre><code>`$hook['display_override'][] = array(`
+`'class'    =&gt; 'Develbar',`
+    `'function'     =&gt; 'debug',`
+    `'filename'     =&gt; 'Develbar.php',`
+    `'filepath'     =&gt; 'third_party/DevelBar/hooks'`
+`);`
+</code></pre>
 
 <p>Open <code>application/third_party/DevelBar/config/config.php</code> :</p>
 
-<p><code>$config['enable_develbar'] = TRUE;</code></p>
+<pre><code>`$config['enable_develbar'] = TRUE;`
+</code></pre>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/JCSama/CodeIgniter-develbar">Codeigniter Developer Toolbar</a> is maintained by <a href="https://github.com/JCSama">JCSama</a>.</span>
