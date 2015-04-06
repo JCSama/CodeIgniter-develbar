@@ -4,7 +4,7 @@ CodeIgniter Developer Toolbar is a third party library based on Profiler Library
 
 # Installation
 
-CODEIGNITER Versoin 2.0.2+
+CodeIgniter Versoin 2.0.2+
 
 Copy the files to the `application/third_party/DevelBar` folder.
 
