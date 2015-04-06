@@ -54,11 +54,26 @@ a {
       margin-left: 0; } }
 
 .page-header {
-  color: #fff;
-  text-align: center;
-  background-color: #159957;
-  background-image: linear-gradient(120deg, #155799, #159957); }
+    color: #FFF;
+    text-align: center;
+    background: #ed6a1e; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlZDZhMWUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjAzOTAwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-radial-gradient(center, ellipse cover,  #ed6a1e 0%, #f03900 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ed6a1e), color-stop(100%,#f03900)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #ed6a1e 0%,#f03900 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #ed6a1e 0%,#f03900 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #ed6a1e 0%,#f03900 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #ed6a1e 0%,#f03900 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed6a1e', endColorstr='#f03900',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
 
+    -moz-box-shadow: 0px 5px 5px 0px #999;
+        -webkit-box-shadow: 0px 5px 5px 0px #999;
+        -o-box-shadow: 0px 5px 5px 0px #999;
+        box-shadow: 0px 5px 5px 0px #999;
+        filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=90, Strength=5);
+
+}
 @media screen and (min-width: 64em) {
   .page-header {
     padding: 5rem 6rem; } }
@@ -112,7 +127,7 @@ a {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-weight: normal;
-  color: #159957; }
+  color: #F03900; }
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
@@ -136,7 +151,7 @@ a {
     padding: 0;
     margin: 0;
     font-size: 0.9rem;
-    color: #567482;
+    color: #666;
     word-break: normal;
     white-space: pre;
     background: transparent;
