@@ -1,0 +1,1 @@
+<img src="<?php echo $icon ?>" alt="Memory usage" /> <?php echo $memory ?>
