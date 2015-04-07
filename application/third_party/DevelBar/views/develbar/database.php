@@ -17,7 +17,7 @@
                 }
                 echo '
                 <p>
-                    <span class="left-col">' . $query.$query.$query.$query.$query . '</span>
+                    <span class="left-col">' . $query . '</span>
                     <span class="right-col">' . $time . ' ' .lang('sec') .'</span>
                 </p>';
             }
