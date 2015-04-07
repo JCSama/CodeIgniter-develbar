@@ -18,6 +18,11 @@ class DevelBar
     const VERSION = '0.1';
 
     /**
+     * Supported CI version
+     */
+    const SUPPORTED_CI_VERSION = '2.2.0';
+
+    /**
      * @var object
      */
     private $CI;
@@ -73,7 +78,7 @@ class DevelBar
     {
         log_message('debug', 'DevelBar Class Initialized !');
 
-        if (version_compare(CI_VERSION, '2.0.2', '<='))
+        if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<='))
             die('Version of CI not supported by DevelBar,
                 Please check ' . anchor($this->CI->config->item('ci_website')) . ' for update.');
 
@@ -123,8 +128,10 @@ class DevelBar
                 $output .= '</body></html>';
 
             $this->CI->output->_display($output);
+            return;
         }
 
+        $this->CI->output->_display();
     }
 
     /**
@@ -217,7 +224,7 @@ class DevelBar
     {
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/setting.png'),
-            'method' => ($method = $this->CI->input->method()),
+            'method' => ($method = $_SERVER['REQUEST_METHOD']),
             'controller' => $this->CI->router->fetch_class(),
             'action' => $this->CI->router->fetch_method(),
             'parameters' => $this->CI->input->{$method}(),
@@ -395,7 +402,7 @@ class DevelBar
     {
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/session.png'),
-            'session' => isset($this->CI->session) ? $this->CI->session->userdata() : array()
+            'session' => isset($this->CI->session) ? $this->CI->session->all_userdata() : array()
         );
 
         return $this->CI->load->view($this->view_folder . 'session', $data, true);
