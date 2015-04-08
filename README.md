@@ -14,21 +14,21 @@ Copy the file `MY_Loader.php` to the `application/core` folder.
 
 Open `application/config/autoload.php` :
 
-`$autoload['packages'] = array(APPPATH . 'third_party/DevelBar');`
+```$autoload['packages'] = array(APPPATH . 'third_party/DevelBar');```
 
 Open `application/config/config.php` :
 
-`$config['enable_hooks'] = TRUE;`
+```$config['enable_hooks'] = TRUE;```
 
 Open `application/config/hooks.php` and add this line :
 
-`$hook['display_override'][] = array(
+```$hook['display_override'][] = array(
 	'class'  	=> 'Develbar',
     'function' 	=> 'debug',
     'filename' 	=> 'Develbar.php',
     'filepath' 	=> 'third_party/DevelBar/hooks'
-);`
+);```
 
 Open `application/third_party/DevelBar/config/config.php` :
 
-`$config['enable_develbar'] = TRUE;`
+```$config['enable_develbar'] = TRUE;```
