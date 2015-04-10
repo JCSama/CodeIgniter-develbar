@@ -25,6 +25,10 @@
 <p>CodeIgniter Developer Toolbar is a third party library based on Profiler Library with additional functionality for debugging and optimization.</p>
 
 <h1>
+    <a id="screen-shot" class="anchor" href="#screen-shot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screen-shot</h1>
+        <img src="images/Screen-Shot-develbar.png" alt="Screen-shot" />
+
+<h1>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
 
 <p>CodeIgniter Versoin >= 2.2.0</p>
@@ -61,6 +65,33 @@
 
 <pre><code>  $config['enable_develbar'] = TRUE;
 </code></pre>
+
+<h1>
+        <a id="extra" class="anchor" href="#extra" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional parameters</h1>
+
+        If you want to disable some sections within the developer toolbar,
+        <p>Open <code>application/third_party/DevelBar/config/config.php</code>, and set the sections value to <code>FALSE</code> :</p>
+        <pre><code>  $config['develbar_sections'] = array(
+            'Benchmarks' 		=> TRUE,
+            'Memory Usage'	   	=> TRUE,
+            'Request'   		=> TRUE,
+            'Database'			=> TRUE,
+            'Hooks'			=> FALSE, // Disable Hooks Section
+            'Libraries'			=> TRUE,
+            'Helpers' 			=> TRUE, // Disable Helpers Section
+            'Views' 			=> TRUE,
+            'Config' 			=> TRUE,
+            'Session' 			=> TRUE,
+            'Models' 			=> TRUE
+  );</code></pre>
+
+
+        To auto check for available new version of CodeIgniter and DeveloperToolbar, you should set <code>check_update</code> option to <code>TRUE</code>,
+                <p>within <code>application/third_party/DevelBar/config/config.php</code> :</p>
+                <pre><code>  $config['check_update'] = TRUE;</code></pre>
+
+        <p>NOTE : if this option is set to TRUE, it will slow down the page loading a little bit.</p>
+
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/JCSama/CodeIgniter-develbar">CodeIgniter Developer Toolbar</a> is maintained by <a href="https://github.com/JCSama">JCSama</a>.</span>
