@@ -10,6 +10,10 @@ Copy the files to the `application/third_party/DevelBar` folder.
 
 Copy the file `MY_Loader.php` to the `application/core` folder.
 
+# Screen-shot
+
+![Alt text](images/Screen-Shot-develbar.png "Developer Toolbar")
+
 # Usage
 
 Open `application/config/autoload.php` :
