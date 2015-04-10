@@ -40,3 +40,33 @@ Open `application/third_party/DevelBar/config/config.php` :
 ```php
 $config['enable_develbar'] = TRUE;
 ```
+
+# Additional parameters
+
+If you want to disable some sections within the developer toolbar,
+
+Open `application/third_party/DevelBar/config/config.php`, and set the sections value to `FALSE` :
+
+```php
+$config['develbar_sections'] = array(
+	'Benchmarks' 		=> TRUE,
+    'Memory Usage'	   	=> TRUE,
+    'Request'   		=> TRUE,
+    'Database'			=> TRUE,
+    'Hooks'				=> FALSE, // Disable Hooks Section
+    'Libraries'			=> TRUE,
+    'Helpers' 			=> FALSE, // Disable Helpers Section,
+    'Views' 			=> TRUE,
+    'Config' 			=> TRUE,
+    'Session' 			=> TRUE,
+    'Models' 			=> TRUE,
+);
+```
+To auto check for available new version of CodeIgniter and DeveloperToolbar, you should set `check_update` option to `TRUE`,
+within `application/third_party/DevelBar/config/config.php` :
+
+```php
+$config['check_update'] = TRUE;
+```
+
+NOTE : if this option is set to TRUE, it will slow down the page loading a little bit.
