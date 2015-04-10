@@ -4,7 +4,7 @@ CodeIgniter Developer Toolbar is a third party library based on Profiler Library
 
 # Screen-shot
 
-![Alt text](images/Screen-Shot-develbar.png "Developer Toolbar")
+![Alt text](https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/gh-pages/images/Screen-Shot-develbar.png "Developer Toolbar")
 
 # Installation
 
