@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.1';
+    const VERSION = '0.2';
 
     /**
      * Supported CI version
@@ -98,12 +98,6 @@ class DevelBar
 
     public function __construct()
     {
-        log_message('debug', 'DevelBar Class Initialized !');
-
-        if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<='))
-            die('Version of CI not supported by DevelBar,
-                Please check ' . anchor($this->CI->config->item('ci_website')) . ' for update.');
-
         $this->initialize();
     }
 
@@ -122,6 +116,7 @@ class DevelBar
         $this->default_options = array_merge($this->default_options, $config);
         $this->assets_folder = APPPATH . 'third_party/DevelBar/assets/';
 
+        log_message('debug', 'DevelBar Class Initialized !');
     }
 
     /**
@@ -129,6 +124,11 @@ class DevelBar
      */
     public function debug()
     {
+
+        if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<'))
+            log_message('info', sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
+
+
         if ($this->CI->input->is_cli_request() || $this->CI->input->is_ajax_request()) {
             $this->CI->output->_display();
 
@@ -136,10 +136,16 @@ class DevelBar
         }
 
         if ($this->default_options['enable_develbar'] == true) {
-            foreach ($this->default_options['develbar_sections'] as $section => $enabled) {
-                if ($enabled) {
-                    $section = strtolower(str_replace(' ', '_', $section));
-                    $this->views[$section] = call_user_func(array($this, $section . '_section'));
+            if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')){
+                $this->default_options['check_update'] = TRUE;
+                $this->views['not_supported'] = $this->CI->load->view($this->view_folder . 'not_supported', array('config' => $this->default_options), true);
+            }
+            else{
+                foreach ($this->default_options['develbar_sections'] as $section => $enabled) {
+                    if ($enabled) {
+                        $section = strtolower(str_replace(' ', '_', $section));
+                        $this->views[$section] = call_user_func(array($this, $section . '_section'));
+                    }
                 }
             }
 
@@ -429,4 +435,5 @@ class DevelBar
 
         return $this->CI->load->view($this->view_folder . 'session', $data, true);
     }
+
 }

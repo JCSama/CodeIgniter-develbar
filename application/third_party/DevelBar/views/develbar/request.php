@@ -6,13 +6,12 @@
         <span class="right-col"><?php echo strtoupper($method) ?></span>
     </p>
 
-    <?php if (count($parameters)): ?>
+    <?php if (count($parameters) > 0): ?>
         <p>
             <span class="left-col"><?php echo lang('parameters') ?> :</span>
         </p>
         <p>
-            <span class="right-col" style="float:none"><pre
-                    style="color:#FFF"><?php print_r($parameters) ?></pre></span>
+            <span class="right-col" style="float:none"><pre style="color:#FFF"><?php echo   print_r($parameters, true) ?></pre></span>
         </p>
     <?php endif ?>
 </div>
