@@ -1,14 +1,36 @@
-<?php defined('BASEPATH') or die('No direct script access.');
-
-
+<?php
 /**
  * Class DevelBar
  *
- * @package    DevelBar
- * @author     Mohamed ES-SAHLI
- * @link       http://codeigniter.com
- * @since      Version 0.1
+ * This content is released under the MIT License (MIT)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	DevelBar
+ * @author	Mohamed ES-SAHLI
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://github.com/JCSama/CodeIgniter-develbar
+ * @since	Version 0.1
+ * @filesource
  */
+defined('BASEPATH') or die('No direct script access.');
+
 class DevelBar
 {
 
@@ -224,7 +246,7 @@ class DevelBar
     {
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/setting.png'),
-            'method' => ($method = $_SERVER['REQUEST_METHOD']),
+            'method' => ($method = strtolower($_SERVER['REQUEST_METHOD'])),
             'controller' => $this->CI->router->fetch_class(),
             'action' => $this->CI->router->fetch_method(),
             'parameters' => $this->CI->input->{$method}(),
