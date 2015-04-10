@@ -59,7 +59,7 @@
         .develbar ul li div.database{ min-width:600px }
         .develbar ul li div.views{ min-width:300px }
         .develbar ul li div.hooks{ min-width:300px }
-        .develbar ul li div.config{ min-width:300px }
+        .develbar ul li div.config{ min-width:320px }
         .develbar ul li div.models{ min-width:200px }
 
 #develbar-off{ position:fixed; bottom:6px; left:14px; cursor:pointer; height:30px; display:none;
