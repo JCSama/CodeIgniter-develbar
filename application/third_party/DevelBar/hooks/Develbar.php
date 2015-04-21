@@ -276,8 +276,11 @@ class DevelBar
             if (is_object($cobject)) {
                 if ($cobject instanceof CI_DB) {
                     $dbs[get_class($this->CI) . ':$' . $name] = $cobject;
-                    $db_server[$cobject->hostname] = $cobject->hostname;
-                } elseif ($cobject instanceof CI_Model) {
+
+                    if(isset($cobject->hostname))
+                        $db_server[$cobject->hostname] = $cobject->hostname;
+                }
+                elseif ($cobject instanceof CI_Model) {
                     foreach (get_object_vars($cobject) as $mname => $mobject) {
                         if ($mobject instanceof CI_DB) {
                             $dbs[get_class($cobject) . ':$' . $mname] = $mobject;
