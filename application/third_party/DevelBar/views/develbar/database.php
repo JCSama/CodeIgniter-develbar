@@ -1,5 +1,5 @@
 <img src="<?php echo $icon ?>" title="<?php echo lang('database') ?>"
-     alt="<?php echo lang('database') ?>"/> <?php echo(count($dbs) ? lang('database') . ' (' . count($db_server) . ')' : 'N/A') ?>
+     alt="<?php echo lang('database') ?>"/> <?php echo(count($dbs) ? lang('database') : 'N/A') ?>
 <?php if(count($dbs)): ?>
 <div class="detail database">
     <?php foreach ($dbs as $name => $db):

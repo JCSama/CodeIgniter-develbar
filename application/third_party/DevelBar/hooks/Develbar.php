@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.2';
+    const VERSION = '0.4';
 
     /**
      * Supported CI version
@@ -109,18 +109,39 @@ class DevelBar
         $this->CI =& get_instance();
         $this->CI->load->config('develbar', true);
         $this->CI->load->helpers($this->helpers);
-        $this->CI->load->language('develbar');
 
         // Initialize default options
         $config = $this->CI->config->config['develbar'];
         $this->default_options = array_merge($this->default_options, $config);
         $this->assets_folder = APPPATH . 'third_party/DevelBar/assets/';
 
+        // Load lang file if exists
+        $this->load_lang_file();
+
+
         log_message('debug', 'DevelBar Class Initialized !');
     }
 
     /**
+     * Load translation file for the default language,
+     * if the file does not exists, set english version as default
+     *
+     * @return void
+     */
+    private function load_lang_file(){
+        $default_language = $this->CI->config->config['language'];
+        $lang_file = APPPATH . 'third_party/DevelBar/language/' . $default_language . '/develbar_lang.php';
+
+        if(!file_exists($lang_file))
+            $default_language = 'english';
+
+        $this->CI->load->language('develbar', $default_language);
+    }
+
+    /**
      * Start Debug Mode
+     *
+     * @return void
      */
     public function debug()
     {
@@ -275,17 +296,10 @@ class DevelBar
         foreach ($cobjects as $name => $cobject) {
             if (is_object($cobject)) {
                 if ($cobject instanceof CI_DB) {
-                    $dbs[get_class($this->CI) . ':$' . $name] = $cobject;
-
-                    if(isset($cobject->hostname))
+                    $controller = &get_instance();
+                    if($controller instanceof CI_Controller) {
+                        $dbs[get_class($this->CI) . ':$' . $name] = $cobject;
                         $db_server[$cobject->hostname] = $cobject->hostname;
-                }
-                elseif ($cobject instanceof CI_Model) {
-                    foreach (get_object_vars($cobject) as $mname => $mobject) {
-                        if ($mobject instanceof CI_DB) {
-                            $dbs[get_class($cobject) . ':$' . $mname] = $mobject;
-                            $db_server[$cobject->hostname] = $cobject->hostname;
-                        }
                     }
                 }
             }
