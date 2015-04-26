@@ -8,3 +8,4 @@ Bugfixes:
 
   - Undefined property :hostname when extending CI_Model.
   - Load the english language file by default if the translation file for a chosen language does not exists.
+
