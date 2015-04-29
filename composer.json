@@ -18,6 +18,6 @@
     },
     "type": "codeigniter-third-party",
     "require": {
-        "compwright/codeigniter-installers": "*"
+        "composer/installers": "~1.0"
     }
 }
