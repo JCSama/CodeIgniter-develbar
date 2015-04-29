@@ -16,5 +16,8 @@
         "issues": "https://github.com/JCSama/CodeIgniter-develbar/issues",
         "source": "https://github.com/JCSama/CodeIgniter-develbar"
     },
-    "type": "codeigniter-third-party"
+    "type": "codeigniter-third-party",
+    "require": {
+        "compwright/codeigniter-installers": "*"
+    }
 }
