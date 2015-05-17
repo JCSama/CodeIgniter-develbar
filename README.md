@@ -6,7 +6,7 @@ Support Multilanguage.
 
 # Screen-shot
 
-![Alt text](images/Screen-Shot-develbar.png "Developer Toolbar")
+![Alt text](https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/gh-pages/images/Screen-Shot-develbar.png "Developer Toolbar")
 
 # Installation
 
