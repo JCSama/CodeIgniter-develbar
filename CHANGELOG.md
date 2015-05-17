@@ -3,6 +3,7 @@
 Bugfixes:
 
   - Support of HMVC, Overriding core/MY_Loader.php
+  - Breaking view when adding config data which contains html tags
 
 ## 0.4 (2015-04-22)
 

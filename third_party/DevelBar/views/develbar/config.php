@@ -10,7 +10,7 @@
                 }
                 echo '<p>';
                 echo '<span class="left-col" style="width:60%">' . $config . ':</span>';
-                echo '<span class="right-col" style="width:40%">' . $val . '</span>';
+                echo '<span class="right-col" style="width:40%">' . htmlentities($val) . '</span>';
                 echo '</p>';
             }
             ?>
