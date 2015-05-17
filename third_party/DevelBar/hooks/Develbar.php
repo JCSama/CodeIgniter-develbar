@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.4';
+    const VERSION = '0.5';
 
     /**
      * Supported CI version

@@ -2,7 +2,8 @@
 
 CodeIgniter Developer Toolbar is a third party library based on Profiler Library with additional functionality for debugging and optimization.
 
-Support Multilanguage.
+- Support Multilanguage.
+- Support HMVC.
 
 # Screen-shot
 
@@ -46,6 +47,12 @@ Open `application/third_party/DevelBar/config/config.php` :
 ```php
 $config['enable_develbar'] = TRUE;
 ```
+
+# For HMVC
+
+If you are using HMVC third party library, copy MX_Loader instead of MY_Loader.php to your `core` directory,
+and change the file name to MY_Loader instead of MX_Loader.
+
 
 # Additional parameters
 
