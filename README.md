@@ -19,13 +19,8 @@ Copy the file `MY_Loader.php` to the `application/core` folder.
 
 # For HMVC
 
-<<<<<<< HEAD
-If you are using HMVC third party library, copy MX_Loader instead of MY_Loader.php to your `core` directory,
-and change the file name to MY_Loader instead of MX_Loader.
-=======
 If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,
 and change the file name to `MY_Loader.php` instead of `MX_Loader.php`.
->>>>>>> origin/master
 
 # Usage
 
