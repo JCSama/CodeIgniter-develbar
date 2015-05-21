@@ -17,6 +17,11 @@ Copy the files to the `application/third_party/DevelBar` folder.
 
 Copy the file `MY_Loader.php` to the `application/core` folder.
 
+# For HMVC
+
+If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,
+and change the file name to `MY_Loader.php` instead of `MX_Loader.php`.
+
 # Usage
 
 Open `application/config/autoload.php` :
@@ -47,12 +52,6 @@ Open `application/third_party/DevelBar/config/config.php` :
 ```php
 $config['enable_develbar'] = TRUE;
 ```
-
-# For HMVC
-
-If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,
-and change the file name to `MY_Loader.php` instead of `MX_Loader.php`.
-
 
 # Additional parameters
 
