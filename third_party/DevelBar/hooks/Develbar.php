@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.5';
+    const VERSION = '0.6';
 
     /**
      * Supported CI version
@@ -83,16 +83,17 @@ class DevelBar
         'enable_develbar' => false,
         'check_update' => false,
         'develbar_sections' => array(
-            'Benchmarks' => true,
-            'Memory Usage' => true,
-            'Request' => true,
-            'Database' => true,
-            'Hooks' => true,
-            'Libraries' => true,
-            'Helpers' => true,
-            'Views' => true,
-            'Config' => true,
-            'Session' => true,
+            'Benchmarks' 		=> TRUE,
+    		'Memory Usage'	   	=> TRUE,
+		    'Request'   		=> TRUE,
+		    'Database'			=> TRUE,
+		    'Hooks'				=> TRUE,
+			'Config' 			=> TRUE,
+		    'Session' 			=> TRUE,
+		    'Views' 			=> TRUE,
+		    'Models' 			=> TRUE,
+		    'Libraries'			=> TRUE,
+	    	'Helpers' 			=> TRUE,
         ),
     );
 

@@ -7,7 +7,7 @@
 </script>
 <div class="develbar" id="develbar-container">
     <ul class="develbar-nav">
-        <li class="none" onclick="HideDevelBar()"><img src="<?php echo $logo ?>" alt="CodeIgniter" />
+        <li class="none" onclick="HideDevelBar()"><img src="<?php echo $logo ?>" alt="CodeIgniter" title="Hide the develbar" />
             <div class="detail">
                 <p><?php echo sprintf(lang('ci_version'), $ci_version) ?></p>
                 <?php if($ci_new_version !== FALSE): ?>
@@ -35,6 +35,6 @@
         <?php endif ?>
     </ul>
 </div>
-<div onclick="ShowDevelBar()" id="develbar-off"><img src="<?php echo $logo ?>" alt="CodeIgniter" />
+<div onclick="ShowDevelBar()" id="develbar-off"><img src="<?php echo $logo ?>" alt="CodeIgniter" title="Show the develbar" />
 
 <!-- END CodeIgniter Developer Toolbar -->
