@@ -1,3 +1,9 @@
+## 0.6 (2015-05-17)
+
+Changes:
+
+- var_dump function is used instead of print_r() to show configuration and session details.
+
 ## 0.5 (2015-05-17)
 
 Bugfixes:
