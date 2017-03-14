@@ -1,3 +1,10 @@
+## 0.7 (2017-03-14)
+
+Changes:
+
+- Database queries display.
+- Global Execution time for multiple database queries.
+
 ## 0.6 (2015-05-21)
 
 Changes:
