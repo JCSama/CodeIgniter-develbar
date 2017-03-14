@@ -22,11 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	DevelBar
- * @author	Mohamed ES-SAHLI
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://github.com/JCSama/CodeIgniter-develbar
- * @since	Version 0.1
+ * @package    DevelBar
+ * @author    Mohamed ES-SAHLI
+ * @license    http://opensource.org/licenses/MIT	MIT License
+ * @link    https://github.com/JCSama/CodeIgniter-develbar
+ * @since    Version 0.1
  * @filesource
  */
 defined('BASEPATH') or die('No direct script access.');
@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.6';
+    const VERSION = '0.7';
 
     /**
      * Supported CI version
@@ -83,17 +83,17 @@ class DevelBar
         'enable_develbar' => false,
         'check_update' => false,
         'develbar_sections' => array(
-            'Benchmarks' 		=> TRUE,
-    		'Memory Usage'	   	=> TRUE,
-		    'Request'   		=> TRUE,
-		    'Database'			=> TRUE,
-		    'Hooks'				=> TRUE,
-			'Config' 			=> TRUE,
-		    'Session' 			=> TRUE,
-		    'Views' 			=> TRUE,
-		    'Models' 			=> TRUE,
-		    'Libraries'			=> TRUE,
-	    	'Helpers' 			=> TRUE,
+            'Benchmarks' => true,
+            'Memory Usage' => true,
+            'Request' => true,
+            'Database' => true,
+            'Hooks' => true,
+            'Config' => true,
+            'Session' => true,
+            'Views' => true,
+            'Models' => true,
+            'Libraries' => true,
+            'Helpers' => true,
         ),
     );
 
@@ -129,12 +129,14 @@ class DevelBar
      *
      * @return void
      */
-    private function load_lang_file(){
+    private function load_lang_file()
+    {
         $default_language = $this->CI->config->config['language'];
         $lang_file = APPPATH . 'third_party/DevelBar/language/' . $default_language . '/develbar_lang.php';
 
-        if(!file_exists($lang_file))
+        if (!file_exists($lang_file)) {
             $default_language = 'english';
+        }
 
         $this->CI->load->language('develbar', $default_language);
     }
@@ -147,8 +149,10 @@ class DevelBar
     public function debug()
     {
 
-        if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<'))
-            log_message('info', sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
+        if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')) {
+            log_message('info',
+                sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
+        }
 
 
         if ($this->CI->input->is_cli_request() || $this->CI->input->is_ajax_request()) {
@@ -158,11 +162,11 @@ class DevelBar
         }
 
         if ($this->default_options['enable_develbar'] == true) {
-            if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')){
-                $this->default_options['check_update'] = TRUE;
-                $this->views['not_supported'] = $this->CI->load->view($this->view_folder . 'not_supported', array('config' => $this->default_options), true);
-            }
-            else{
+            if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')) {
+                $this->default_options['check_update'] = true;
+                $this->views['not_supported'] = $this->CI->load->view($this->view_folder . 'not_supported',
+                    array('config' => $this->default_options), true);
+            } else {
                 foreach ($this->default_options['develbar_sections'] as $section => $enabled) {
                     if ($enabled) {
                         $section = strtolower(str_replace(' ', '_', $section));
@@ -174,8 +178,9 @@ class DevelBar
             $output = $this->CI->output->get_output();
             $output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count) . $this->develbar_output();
 
-            if ($count > 0)
+            if ($count > 0) {
                 $output .= '</body></html>';
+            }
 
             $this->CI->output->_display($output);
             return;
@@ -292,15 +297,19 @@ class DevelBar
     {
         $dbs = $data = array();
         $cobjects = get_object_vars($this->CI);
-        $db_server = array();
 
         foreach ($cobjects as $name => $cobject) {
             if (is_object($cobject)) {
                 if ($cobject instanceof CI_DB) {
                     $controller = &get_instance();
-                    if($controller instanceof CI_Controller) {
+                    if ($controller instanceof CI_Controller) {
                         $dbs[get_class($this->CI) . ':$' . $name] = $cobject;
-                        $db_server[$cobject->hostname] = $cobject->hostname;
+                    }
+                } elseif ($cobject instanceof CI_Model) {
+                    foreach (get_object_vars($cobject) as $mname => $mobject) {
+                        if ($mobject instanceof CI_DB) {
+                            $dbs[get_class($cobject) . ':$' . $mname] = $mobject;
+                        }
                     }
                 }
             }
@@ -310,7 +319,6 @@ class DevelBar
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/database.png'),
             'dbs' => $dbs,
-            'db_server' => $db_server,
         );
 
         return $this->CI->load->view($this->view_folder . 'database', $data, true);
@@ -327,8 +335,9 @@ class DevelBar
         $hooks = array();
 
         foreach ($this->CI->hooks->hooks as $hook_point => $_hooks) {
-            if (!isset($_hooks[0]))
+            if (!isset($_hooks[0])) {
                 $_hooks = array($_hooks);
+            }
 
             foreach ($_hooks as $hook) {
                 if (class_exists($hook['class'])) {
@@ -336,7 +345,6 @@ class DevelBar
                     $total_hooks++;
                 }
             }
-
         }
 
         $data = array(
