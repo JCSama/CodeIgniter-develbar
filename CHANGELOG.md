@@ -1,3 +1,9 @@
+## 0.8 (2017-03-16)
+
+Changes:
+
+- New Tab for Ajax request
+
 ## 0.7 (2017-03-15)
 
 Changes:
