@@ -37,7 +37,7 @@ class DevelBar
     /**
      * DevelBar version
      */
-    const VERSION = '0.7';
+    const VERSION = '0.8';
 
     /**
      * Supported CI version
@@ -77,7 +77,7 @@ class DevelBar
     );
 
     /**
-     * List of profiler sections available to show
+     * List of profiler sections available
      */
     private $default_options = array(
         'enable_develbar' => false,
@@ -88,15 +88,19 @@ class DevelBar
             'Request' => true,
             'Database' => true,
             'Hooks' => true,
-            'Config' => true,
-            'Session' => true,
-            'Views' => true,
-            'Models' => true,
+            'Models' => TRUE,
             'Libraries' => true,
             'Helpers' => true,
+            'Views' => true,
+            'Config' => true,
+            'Session' => true,
+            'Ajax' => true,
         ),
     );
 
+    /**
+     * DevelBar constructor.
+     */
     public function __construct()
     {
         $this->initialize();
@@ -118,7 +122,6 @@ class DevelBar
 
         // Load lang file if exists
         $this->load_lang_file();
-
 
         log_message('debug', 'DevelBar Class Initialized !');
     }
@@ -148,12 +151,10 @@ class DevelBar
      */
     public function debug()
     {
-
         if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')) {
             log_message('info',
                 sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
         }
-
 
         if ($this->CI->input->is_cli_request() || $this->CI->input->is_ajax_request()) {
             $this->CI->output->_display();
@@ -297,6 +298,7 @@ class DevelBar
     {
         $dbs = $data = array();
         $cobjects = get_object_vars($this->CI);
+        $db_server = array();
 
         foreach ($cobjects as $name => $cobject) {
             if (is_object($cobject)) {
@@ -312,6 +314,7 @@ class DevelBar
                         }
                     }
                 }
+
             }
 
         }
@@ -319,6 +322,7 @@ class DevelBar
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/database.png'),
             'dbs' => $dbs,
+            'db_server' => $db_server,
         );
 
         return $this->CI->load->view($this->view_folder . 'database', $data, true);
@@ -345,6 +349,7 @@ class DevelBar
                     $total_hooks++;
                 }
             }
+
         }
 
         $data = array(
@@ -415,7 +420,7 @@ class DevelBar
         $_views = array();
 
         foreach ($views as $path => $data) {
-            if (strpos($path, 'develbar') !== false) {
+            if (stripos($path, 'develbar') !== false) {
                 continue;
             }
 
@@ -461,4 +466,18 @@ class DevelBar
         return $this->CI->load->view($this->view_folder . 'session', $data, true);
     }
 
+    /**
+     * List ajax requests
+     *
+     * @return string
+     */
+    protected function ajax_section()
+    {
+        $data = array(
+            'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/ajax.png'),
+            'js' => $this->CI->load->file($this->assets_folder . 'js/ajax.js', true),
+        );
+
+        return $this->CI->load->view($this->view_folder . 'ajax', $data, true);
+    }
 }

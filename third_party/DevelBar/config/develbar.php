@@ -42,15 +42,16 @@ $config['develbar_download_link'] = 'https://github.com/JCSama/CodeIgniter-devel
 |
 */
 $config['develbar_sections'] = array(
-	'Benchmarks' 		=> TRUE,
+    'Benchmarks' 		=> TRUE,
     'Memory Usage'	   	=> TRUE,
     'Request'   		=> TRUE,
     'Database'			=> TRUE,
     'Hooks'				=> TRUE,
-	'Config' 			=> TRUE,
-    'Session' 			=> TRUE,
-    'Views' 			=> TRUE,
-    'Models' 			=> TRUE,
+    'Ajax' 			    => TRUE,
     'Libraries'			=> TRUE,
     'Helpers' 			=> TRUE,
+    'Views' 			=> TRUE,
+    'Config' 			=> TRUE,
+    'Session' 			=> TRUE,
+    'Models' 			=> TRUE,
 );

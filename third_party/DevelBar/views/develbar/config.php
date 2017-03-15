@@ -9,8 +9,8 @@
                     $val = print_r($val, true);
                 }
                 echo '<p>';
-                echo '<span class="left-col" style="width:40%"><strong>' . $config . ':</strong></span>';
-                echo '<span class="right-col" style="width:60%"><pre>' . htmlentities($val) . '</pre></span>';
+                echo '<span class="left-col" style="width:60%">' . $config . ':</span>';
+                echo '<span class="right-col" style="width:40%">' . htmlentities($val) . '</span>';
                 echo '</p>';
             }
             ?>

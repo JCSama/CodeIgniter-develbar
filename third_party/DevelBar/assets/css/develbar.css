@@ -56,13 +56,14 @@
 .develbar ul li div.detail::after { content: ''; position: absolute; bottom:-8px; left:8px; width: 0; height: 0; border-left:6px solid transparent; border-right:6px solid transparent; border-top: 6px solid #f03900 }
 .develbar ul li div.detail .scroll { min-width:200px; max-width:400px; max-height:280px; overflow:scroll }
 .develbar ul li.none div.detail::after { content: ''; border:0 }
-.develbar ul li:hover div.detail{ display:block; border-color:#f03900 }
+.develbar ul li:hover div.detail, .develbar ul li.active div.detail{ display:block; border-color:#f03900 }
 .develbar ul li div.benchmarks{ min-width:360px }
-.develbar ul li div.database{ min-width:600px }
+.develbar ul li div.database{ min-width:400px }
 .develbar ul li div.views{ min-width:300px }
 .develbar ul li div.hooks{ min-width:300px }
 .develbar ul li div.config{ min-width:320px }
 .develbar ul li div.models{ min-width:200px }
+.develbar ul li div.ajax{ min-width:340px }
 
 #develbar-off{ position:fixed; bottom:6px; left:14px; cursor:pointer; height:30px; display:none;
     -moz-box-shadow: 0px 0px 5px 0px #999;
@@ -75,3 +76,8 @@
     border-radius: 16px;
     -webkit-border-radius:16px;
 }
+.develbar .ci-toolbar-status{ background-color:#666; color:#FFF; padding:2px 4px }
+.develbar .ci-toolbar-status-red{ background-color:#FF0000; color:#FFF; padding:2px 4px }
+.develbar .ci-ajax-request-loading{ background-color:#F9AA20; color:#FFF; padding:2px 4px }
+.develbar .ci-toolbar-ajax-info{ border-bottom:1px solid #666}
+.develbar .ci-toolbar-ajax-head{ background-color: #000; border:0; margin:0; padding:0 }

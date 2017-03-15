@@ -26,3 +26,10 @@ $lang['update_message'] = 'Update verfügbar ist, um %s';
 $lang['develbar_version'] = 'DevelBar version : %s';
 $lang['php_version'] = 'PHP version : %s';
 $lang['default_language'] = 'Standard-Sprache : %s';
+
+$lang['ajax_requests'] = 'Ajax requests';
+$lang['status'] = 'Status';
+$lang['url'] = 'URL';
+$lang['type'] = 'Type';
+$lang['time'] = 'Time';
+
