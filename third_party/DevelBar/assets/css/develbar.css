@@ -1,7 +1,7 @@
 .develbar{
     font-family: Tahoma!important;
-    font-size:.7em!important;
-    position:fixed; z-index:1000; bottom:0; left:0; width:100%; height:40px; color:#90949f; font-size:12px;
+    font-size:.8em!important;
+    position:fixed; bottom:0; left:0; width:100%; height:40px; color:#90949f; font-size:12px;
     background: #2e313a; /* Old browsers */
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJlMzEzYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMDIxMjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -18,51 +18,51 @@
     -o-box-shadow: 0px -2px 5px 0px #999;
     box-shadow: 0px -2px 5px 0px #999;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=90, Strength=5);
-    }
-    .develbar p{ padding:2px 0; margin:0; overflow:hidden }
-    .develbar p::after{ content:''; clear:both }
-    .develbar p .left-col{ display:block; float:left; width:80% }
-    .develbar p .right-col{ display:block; float:right; color:#FFF }
+}
+.develbar p{ padding:2px 0; margin:0; overflow:hidden }
+.develbar p::after{ content:''; clear:both }
+.develbar p .left-col{ display:block; float:left; width:80% }
+.develbar p .right-col{ display:block; float:right; color:#FFF }
 
-    .develbar .label{ padding:2px 4px; margin-right:2px;
-        font-size:11px; color:#FFF; -moz-border-radius:3px;  -webkit-border-radius: 3px; border-radius:3px; }
-        .develbar .warning{ background:#F0AD4E; border-color:#EEA236 }
-    .develbar a{ color:#33BCEF; text-decoration:none }
-        .develbar a:hover{ color:#33BCEF; text-decoration:underline }
-    .develbar ul{ list-style:none; float:left; width:100%; padding-left:10px; padding-top:0; margin:0 }
-        .develbar ul li{ float:left; height:40px; cursor:default; position:relative; margin-right:10px; padding:0 4px }
-        .develbar ul li.none{ cursor:pointer }
-        .develbar ul li:hover{ border-color:#f03900; color:#FFF }
-        .develbar ul li img{ max-height:40px; max-width:40px; display: inline-block; vertical-align:middle; margin-right:2px; }
-        .develbar ul li:before { content: ' '; display: inline-block; vertical-align:middle; height: 100%; }
-        .develbar ul li div.detail{ min-width:200px; max-height:300px; color:#90949f; padding:6px 12px; display:none; position:absolute; left:0; bottom:40px; background:#2E313A;
-            border-bottom:2px solid transparent;
-            -moz-box-shadow: 0px -4px 5px 0px #999;
-            -webkit-box-shadow: 0px -4px 5px 0px #999;
-            -o-box-shadow: 0px -4px 5px 0px #999;
-            box-shadow: 0px -4px 5px 0px #999;
-            filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=90, Strength=5);
-            -moz-border-radius: 5px;
-            -moz-border-radius-bottomleft:0;
-            -moz-border-radius-bottomright:0;
-            -webkit-border-radius: 5px;
-            -webkit-border-bottom-left-radius:0;
-            -webkit-border-bottom-right-radius:0;
-            border-radius: 5px;
-            border-bottom-right-radius:0;
-            border-bottom-left-radius:0;
-        }
+.develbar .label{ padding:2px 4px; margin-right:2px;
+    font-size:11px; color:#FFF; -moz-border-radius:3px;  -webkit-border-radius: 3px; border-radius:3px; }
+.develbar .warning{ background:#F0AD4E; border-color:#EEA236 }
+.develbar a{ color:#33BCEF; text-decoration:none }
+.develbar a:hover{ color:#33BCEF; text-decoration:underline }
+.develbar ul{ list-style:none; float:left; width:100%; padding-left:10px; padding-top:0; margin:0 }
+.develbar ul li{ float:left; height:40px; cursor:default; position:relative; margin-right:10px; padding:0 4px }
+.develbar ul li.none{ cursor:pointer }
+.develbar ul li:hover{ border-color:#f03900; color:#FFF }
+.develbar ul li img{ max-height:40px; max-width:40px; display: inline-block; vertical-align:middle; margin-right:2px; }
+.develbar ul li:before { content: ' '; display: inline-block; vertical-align:middle; height: 100%; }
+.develbar ul li div.detail{ min-width:200px; max-height:300px; color:#90949f; padding:6px 12px; display:none; position:absolute; left:0; bottom:40px; background:#2E313A;
+    border-bottom:2px solid transparent;
+    -moz-box-shadow: 0px -4px 5px 0px #999;
+    -webkit-box-shadow: 0px -4px 5px 0px #999;
+    -o-box-shadow: 0px -4px 5px 0px #999;
+    box-shadow: 0px -4px 5px 0px #999;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#999, Direction=90, Strength=5);
+    -moz-border-radius: 5px;
+    -moz-border-radius-bottomleft:0;
+    -moz-border-radius-bottomright:0;
+    -webkit-border-radius: 5px;
+    -webkit-border-bottom-left-radius:0;
+    -webkit-border-bottom-right-radius:0;
+    border-radius: 5px;
+    border-bottom-right-radius:0;
+    border-bottom-left-radius:0;
+}
 
-        .develbar ul li div.detail::after { content: ''; position: absolute; bottom:-8px; left:8px; width: 0; height: 0; border-left:6px solid transparent; border-right:6px solid transparent; border-top: 6px solid #f03900 }
-        .develbar ul li div.detail .scroll { min-width:200px; max-height:280px; overflow:scroll }
-        .develbar ul li.none div.detail::after { content: ''; border:0 }
-        .develbar ul li:hover div.detail{ display:block; border-color:#f03900 }
-        .develbar ul li div.benchmarks{ min-width:360px }
-        .develbar ul li div.database{ min-width:600px }
-        .develbar ul li div.views{ min-width:300px }
-        .develbar ul li div.hooks{ min-width:300px }
-        .develbar ul li div.config{ min-width:320px; max-width:400px }
-        .develbar ul li div.models{ min-width:200px }
+.develbar ul li div.detail::after { content: ''; position: absolute; bottom:-8px; left:8px; width: 0; height: 0; border-left:6px solid transparent; border-right:6px solid transparent; border-top: 6px solid #f03900 }
+.develbar ul li div.detail .scroll { min-width:200px; max-width:400px; max-height:280px; overflow:scroll }
+.develbar ul li.none div.detail::after { content: ''; border:0 }
+.develbar ul li:hover div.detail{ display:block; border-color:#f03900 }
+.develbar ul li div.benchmarks{ min-width:360px }
+.develbar ul li div.database{ min-width:600px }
+.develbar ul li div.views{ min-width:300px }
+.develbar ul li div.hooks{ min-width:300px }
+.develbar ul li div.config{ min-width:320px }
+.develbar ul li div.models{ min-width:200px }
 
 #develbar-off{ position:fixed; bottom:6px; left:14px; cursor:pointer; height:30px; display:none;
     -moz-box-shadow: 0px 0px 5px 0px #999;
@@ -75,5 +75,3 @@
     border-radius: 16px;
     -webkit-border-radius:16px;
 }
-
-

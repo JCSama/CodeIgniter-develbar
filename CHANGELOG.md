@@ -1,9 +1,10 @@
-## 0.7 (2017-03-14)
+## 0.7 (2017-03-15)
 
 Changes:
 
 - Database queries display.
 - Global Execution time for multiple database queries.
+- Display views variables
 
 ## 0.6 (2015-05-21)
 

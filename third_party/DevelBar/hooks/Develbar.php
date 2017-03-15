@@ -414,14 +414,13 @@ class DevelBar
 
         $_views = array();
 
-        foreach ($views as $path => &$view) {
-            if (strpos($view, 'develbar') !== false) {
+        foreach ($views as $path => $data) {
+            if (strpos($path, 'develbar') !== false) {
                 continue;
             }
 
             $path = str_replace($base_path, '', $path);
-            $_views[$path] = $view;
-
+            $_views[$path] = $data;
         }
 
         $data = array(
