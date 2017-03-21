@@ -31,13 +31,14 @@
  */
 defined('BASEPATH') or die('No direct script access.');
 
-class DevelBar
+
+class Develbar
 {
 
     /**
      * DevelBar version
      */
-    const VERSION = '0.8';
+    const VERSION = '1.0';
 
     /**
      * Supported CI version
@@ -77,6 +78,13 @@ class DevelBar
     );
 
     /**
+     * @var array
+     */
+    private $mimes = array(
+        'text/html'
+    );
+
+    /**
      * List of profiler sections available
      */
     private $default_options = array(
@@ -88,7 +96,7 @@ class DevelBar
             'Request' => true,
             'Database' => true,
             'Hooks' => true,
-            'Models' => TRUE,
+            'Models' => true,
             'Libraries' => true,
             'Helpers' => true,
             'Views' => true,
@@ -156,13 +164,22 @@ class DevelBar
                 sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
         }
 
-        if ($this->CI->input->is_cli_request() || $this->CI->input->is_ajax_request()) {
+        if ($this->CI->input->is_cli_request()) {
             $this->CI->output->_display();
 
             return;
         }
 
-        if ($this->default_options['enable_develbar'] == true) {
+        if ($this->CI->input->is_ajax_request()) {
+            $this->debug_ajax_request();
+
+            return;
+        }
+
+        if ($this->default_options['enable_develbar'] == true && $this->CI->router->class != 'develbarprofiler'
+            && in_array($this->CI->output->get_content_type(),
+                $this->mimes)
+        ) {
             if (version_compare(CI_VERSION, self::SUPPORTED_CI_VERSION, '<')) {
                 $this->default_options['check_update'] = true;
                 $this->views['not_supported'] = $this->CI->load->view($this->view_folder . 'not_supported',
@@ -187,6 +204,28 @@ class DevelBar
             return;
         }
 
+        $this->CI->output->_display();
+    }
+
+    /**
+     * Debug Ajax requests
+     */
+    private function debug_ajax_request()
+    {
+        $this->CI->load->driver('cache', array('adapter' => 'file', 'key_prefix' => 'ci_toolbar_profiler_'));
+        $develbarConfig = $this->CI->config->config['develbar'];
+
+        $profiler['ajax_requests'] = $this->request_section(false);
+        $profiler['database'] = $this->database_section(false);
+        $profiler['models'] = $this->models_section(false);
+        $profiler['helpers'] = $this->helpers_section(false);
+        $profiler['libraries'] = $this->libraries_section(false);
+        $profiler['config'] = $this->config_section(false);
+        $profilerId = uniqid();
+
+        $this->CI->cache->save($profilerId, $profiler, $develbarConfig['profiler_key_expiration_time']);
+
+        $this->CI->output->set_header("X-CI-Toolbar-Profiler: $profilerId");
         $this->CI->output->_display();
     }
 
@@ -226,11 +265,11 @@ class DevelBar
      *
      * @return    array
      */
-    protected function benchmarks_section()
+    protected function benchmarks_section($return_view = true)
     {
         $data['icon'] = image_base64_encode($this->assets_folder . 'images/timer.png');
 
-        $data['benshmarks']['total_time'] = array(
+        $data['benchmarks']['total_time'] = array(
             'profile' => 'Total Execution Time',
             'elapsed_time' => $this->CI->benchmark->elapsed_time()
         );
@@ -244,13 +283,17 @@ class DevelBar
                 ) {
 
                     $profile = ucwords(str_replace(array('_', '-'), ' ', $matches[1]));
-                    $data['benshmarks']['profiles'][] = array(
+                    $data['benchmarks']['profiles'][] = array(
                         'profile' => $profile,
                         'elapsed_time' => $this->CI->benchmark->elapsed_time($start, $end),
                     );
 
                 }
             }
+        }
+
+        if (!$return_view) {
+            return $data;
         }
 
         return $this->CI->load->view($this->view_folder . 'benchmarks', $data, true);
@@ -276,7 +319,7 @@ class DevelBar
      *
      * @return mixed
      */
-    protected function request_section()
+    protected function request_section($return_view = true)
     {
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/setting.png'),
@@ -286,19 +329,23 @@ class DevelBar
             'parameters' => $this->CI->input->{$method}(),
         );
 
+        if (!$return_view) {
+            return $data;
+        }
+
         return $this->CI->load->view($this->view_folder . 'request', $data, true);
     }
 
     /**
      * Compile Queries
      *
+     * @param bool $return_view
      * @return mixed
      */
-    protected function database_section()
+    protected function database_section($return_view = true)
     {
         $dbs = $data = array();
         $cobjects = get_object_vars($this->CI);
-        $db_server = array();
 
         foreach ($cobjects as $name => $cobject) {
             if (is_object($cobject)) {
@@ -314,16 +361,17 @@ class DevelBar
                         }
                     }
                 }
-
             }
-
         }
 
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/database.png'),
             'dbs' => $dbs,
-            'db_server' => $db_server,
         );
+
+        if (!$return_view) {
+            return $data;
+        }
 
         return $this->CI->load->view($this->view_folder . 'database', $data, true);
     }
@@ -344,7 +392,7 @@ class DevelBar
             }
 
             foreach ($_hooks as $hook) {
-                if (class_exists($hook['class'])) {
+                if (class_exists($hook['class']) && get_class($this) != $hook['class']) {
                     $hooks[$hook_point][] = $hook;
                     $total_hooks++;
                 }
@@ -364,15 +412,22 @@ class DevelBar
     /**
      * Lists of loaded libraries
      *
+     * @param bool $return_view
      * @return mixed
      */
-    protected function libraries_section()
+    protected function libraries_section($return_view = true)
     {
         $loaded_libraries =& is_loaded();
+        asort($loaded_libraries);
+
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/library.png'),
             'loaded_libraries' => $loaded_libraries,
         );
+
+        if (!$return_view) {
+            return $data;
+        }
 
         return $this->CI->load->view($this->view_folder . 'libraries', $data, true);
     }
@@ -382,12 +437,19 @@ class DevelBar
      *
      * @return mixed
      */
-    protected function helpers_section()
+    protected function helpers_section($return_view = true)
     {
+        $helpers = array_keys($this->CI->load->get_helpers());
+        asort($helpers);
+
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/helper.png'),
-            'helpers' => $this->CI->load->get_helpers(),
+            'helpers' => $helpers,
         );
+
+        if (!$return_view) {
+            return $data;
+        }
 
         return $this->CI->load->view($this->view_folder . 'helpers', $data, true);
     }
@@ -397,12 +459,19 @@ class DevelBar
      *
      * @return mixed
      */
-    protected function models_section()
+    protected function models_section($return_view = true)
     {
+        $models = $this->CI->load->get_models();
+        asort($models);
+
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/model.png'),
             'models' => $this->CI->load->get_models(),
         );
+
+        if (!$return_view) {
+            return $data;
+        }
 
         return $this->CI->load->view($this->view_folder . 'models', $data, true);
     }
@@ -441,12 +510,17 @@ class DevelBar
      *
      * @return mixed
      */
-    protected function config_section()
+    protected function config_section($return_view = true)
     {
+        unset($this->CI->config->config['develbar']);
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/config.png'),
             'configuration' => $this->CI->config->config
         );
+
+        if (!$return_view) {
+            return $data;
+        }
 
         return $this->CI->load->view($this->view_folder . 'config', $data, true);
     }

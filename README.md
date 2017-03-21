@@ -15,7 +15,9 @@ CodeIgniter Versoin >= 2.2.0
 
 Copy the files to the `application/third_party/DevelBar` folder.
 
-Copy the file `MY_Loader.php` to the `application/core` folder.
+Copy the file `core/MY_Loader.php` to the `application/core` folder.
+
+Copy the file `controllers/develbarprofiler.php` to the `application/controllers` folder.
 
 # For HMVC
 

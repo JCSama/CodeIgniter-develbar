@@ -19,7 +19,9 @@ $config['enable_develbar'] = TRUE;
 | if this option is set to TRUE, it will slow down the page loading
 |
 */
-$config['check_update'] = FALSE;
+$config['check_update'] = TRUE;
+
+$config['profiler_key_expiration_time'] = 1800; // sec
 
 $config['documentation_link'] = 'http://www.codeigniter.com/userguide3/';
 
@@ -42,7 +44,7 @@ $config['develbar_download_link'] = 'https://github.com/JCSama/CodeIgniter-devel
 |
 */
 $config['develbar_sections'] = array(
-    'Benchmarks' 		=> TRUE,
+	'Benchmarks' 		=> TRUE,
     'Memory Usage'	   	=> TRUE,
     'Request'   		=> TRUE,
     'Database'			=> TRUE,

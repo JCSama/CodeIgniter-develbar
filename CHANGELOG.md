@@ -1,3 +1,9 @@
+## 1.0 (2017-03-21)
+
+Changes:
+
+- New Profiler page for Ajax request
+
 ## 0.8 (2017-03-16)
 
 Changes:

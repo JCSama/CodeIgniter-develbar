@@ -4,7 +4,7 @@
 <div class="detail">
     <div class="scroll">
     <?php
-    foreach (array_keys($helpers) as $helper) {
+    foreach ($helpers as $helper) {
         echo '
             <p>
                 <span class="left-col"><strong>' . ucfirst($helper) . '</strong></span>';

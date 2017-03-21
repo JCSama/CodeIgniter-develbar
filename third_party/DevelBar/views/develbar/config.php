@@ -1,6 +1,5 @@
 <img src="<?php echo $icon ?>"
      alt="<?php echo lang('config') ?>" title="<?php echo lang('config') ?>"/> <?php echo lang('config') ?>
-<?php if (count($loaded_hooks)): ?>
     <div class="detail config">
         <div class="scroll">
             <?php
@@ -16,4 +15,3 @@
             ?>
         </div>
     </div>
-<?php endif; ?>
