@@ -75,6 +75,7 @@ $config['develbar_sections'] = array(
     'Config' 			=> TRUE,
     'Session' 			=> TRUE,
     'Models' 			=> TRUE,
+    'Ajax'                      > TRUE,
 );
 ```
 To auto check for available new version of CodeIgniter and DeveloperToolbar, you should set `check_update` option to `TRUE`,
