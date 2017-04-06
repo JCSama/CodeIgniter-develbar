@@ -17,7 +17,7 @@ Copy the files to the `application/third_party/DevelBar` folder.
 
 Copy the file `MY_Loader.php` to the `application/core` folder.
 
-Change permission 777  to application/cache folder
+Change permission 777  to application/cache folder. (Otherwise ajax profiler won't work)
 
 # For HMVC
 
