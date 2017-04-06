@@ -17,6 +17,8 @@ Copy the files to the `application/third_party/DevelBar` folder.
 
 Copy the file `MY_Loader.php` to the `application/core` folder.
 
+Change permission 777  to application/cache folder
+
 # For HMVC
 
 If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,
