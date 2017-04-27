@@ -34,6 +34,9 @@ class MY_Loader extends MX_Loader
         return $this->_ci_views;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_models(){
         return $this->_ci_models;
     }
@@ -101,7 +104,7 @@ class MY_Loader extends MX_Loader
     		}
 
             // PATCH : Add the the loaded view file to the list
-            $this->_ci_views[$_ci_path] = $_ci_file;
+            $this->_ci_views[$_ci_path] = isset($_ci_vars) ? $_ci_vars : array();
 
     		log_message('debug', 'File loaded: '.$_ci_path);
 

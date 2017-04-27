@@ -1,3 +1,23 @@
+## 1.0 (2017-03-21)
+
+Changes:
+
+- New Profiler page for Ajax request
+
+## 0.8 (2017-03-16)
+
+Changes:
+
+- New Tab for Ajax request
+
+## 0.7 (2017-03-15)
+
+Changes:
+
+- Database queries display.
+- Global Execution time for multiple database queries.
+- Display views variables
+
 ## 0.6 (2015-05-21)
 
 Changes:

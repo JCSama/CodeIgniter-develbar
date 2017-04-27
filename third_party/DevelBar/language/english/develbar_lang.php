@@ -26,3 +26,16 @@ $lang['update_message'] = 'Update is available to %s';
 $lang['develbar_version'] = 'DevelBar version : %s';
 $lang['php_version'] = 'PHP version : %s';
 $lang['default_language'] = 'Default language : %s';
+
+$lang['ajax_requests'] = 'Ajax requests';
+$lang['status'] = 'Status';
+$lang['params'] = 'Params';
+$lang['profiler'] = 'Profiler';
+$lang['url'] = 'URL';
+$lang['type'] = 'Type';
+$lang['time'] = 'Time';
+$lang['profiler_key_has_expired'] = 'Profiler key has expired :(';
+$lang['server'] = 'Server';
+$lang['queries'] = 'Queries';
+$lang['key'] = 'Key';
+$lang['value'] = 'Value';

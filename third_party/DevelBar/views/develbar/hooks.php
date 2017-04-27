@@ -12,10 +12,10 @@
                     $border = $key == count($hooks)-1 ? '' : 'border-bottom:1px solid #57595E';
                     echo '<span class="right-col" style="margin-left:20px;'.$border.'">';
                     foreach ($hook as $key => $value) {
-	                    $value = is_array($value) ? print_r($value, true) : $value;
                         echo '<span class="left-col" style="width:30%">' . $key . ':</span>';
                         echo '<span class="right-col" style="width:70%">' . $value . '</span>';
                     }
+
                     echo '</span>';
                 }
 

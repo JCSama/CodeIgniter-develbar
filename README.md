@@ -8,6 +8,7 @@ CodeIgniter Developer Toolbar is a third party library based on Profiler Library
 # Screen-shot
 
 ![Alt text](https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/gh-pages/images/Screen-Shot-develbar.png "Developer Toolbar")
+![Alt text](https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/gh-pages/images/Screen-Shot-develbar-profiler.png "Developer Toolbar Profiler")
 
 # Installation
 
@@ -15,13 +16,12 @@ CodeIgniter Versoin >= 2.2.0
 
 Copy the files to the `application/third_party/DevelBar` folder.
 
-Copy the file `MY_Loader.php` to the `application/core` folder.
+Copy the file `core/MY_Loader.php` to the `application/core` folder.
 
-<<<<<<< HEAD
-Change permission 777  to application/cache folder. (Otherwise ajax profiler won't work)
+Copy the file `controllers/develbarprofiler.php` to the `application/controllers` folder.
 
-=======
->>>>>>> parent of bffffd6... Update README.md
+Change application/cache folder permission to 777
+
 # For HMVC
 
 If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,
@@ -77,6 +77,7 @@ $config['develbar_sections'] = array(
     'Config' 			=> TRUE,
     'Session' 			=> TRUE,
     'Models' 			=> TRUE,
+    'Ajax'                      > TRUE,
 );
 ```
 To auto check for available new version of CodeIgniter and DeveloperToolbar, you should set `check_update` option to `TRUE`,

@@ -11,9 +11,7 @@
             <span class="left-col"><?php echo lang('parameters') ?> :</span>
         </p>
         <p>
-            <span class="right-col" style="float:none">
-            	<pre style="color:#FFF;background:transparent;border:0"><?php echo   print_r($parameters, true) ?></pre>
-            </span>
+            <span class="right-col" style="float:none"><pre style="color:#FFF"><?php echo   print_r($parameters, true) ?></pre></span>
         </p>
     <?php endif ?>
 </div>
