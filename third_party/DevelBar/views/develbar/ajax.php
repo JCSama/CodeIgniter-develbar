@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    var cidvl_siteurl = '<?php echo site_url(); ?>';
     <?php echo $js ?>
 </script>
 <img src="<?php echo $icon ?>" alt="<?php echo lang('ajax_requests') ?>"
