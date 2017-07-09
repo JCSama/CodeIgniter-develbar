@@ -38,7 +38,7 @@ class Develbar
     /**
      * DevelBar version
      */
-    const VERSION = '1.0';
+    const VERSION = '1.1';
 
     /**
      * Supported CI version
@@ -193,7 +193,17 @@ class Develbar
                 }
             }
 
+
             $output = $this->CI->output->get_output();
+
+            // Patch for Pace.js or similar
+            if (true == $this->default_options['develbar_sections']['Ajax']) {
+                $js = $this->CI->load->file($this->assets_folder.'js/ajax.js', true);
+                $js = '<script type="text/javascript">'.$js.'</script>';
+                $output = preg_replace('|<head>.*?|is', '<head>'.$js.'$1', $output, 1, $count);
+            }
+            // END Patch
+
             $output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count) . $this->develbar_output();
 
             if ($count > 0) {
@@ -549,7 +559,7 @@ class Develbar
     {
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/ajax.png'),
-            'js' => $this->CI->load->file($this->assets_folder . 'js/ajax.js', true),
+            //'js' => $this->CI->load->file($this->assets_folder . 'js/ajax.js', true),
         );
 
         return $this->CI->load->view($this->view_folder . 'ajax', $data, true);

@@ -22,6 +22,8 @@ Copy the file `controllers/develbarprofiler.php` to the `application/controllers
 
 Change application/cache folder permission to 777
 
+Notice : You may need to add <head> tag in your html page for AJAX Panel.
+
 # For HMVC
 
 If you are using HMVC third party library, copy `MX_Loader.php` instead of `MY_Loader.php` to your `core` directory,

@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    var cidvl_siteurl = '<?php echo site_url(); ?>';
-    <?php echo $js ?>
-</script>
 <img src="<?php echo $icon ?>" alt="<?php echo lang('ajax_requests') ?>"
      title="<?php echo lang('ajax_requests') ?>"/> <span class="ci-toolbar-ajax-requests"></span>
 <div class="detail ajax ci-toolbar-block-ajax">
