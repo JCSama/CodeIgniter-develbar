@@ -195,16 +195,19 @@ class Develbar
 
 
             $output = $this->CI->output->get_output();
+            $develBarOutput = $this->develbar_output();
 
             // Patch for Pace.js or similar
             if (true == $this->default_options['develbar_sections']['Ajax']) {
                 $js = $this->CI->load->file($this->assets_folder.'js/ajax.js', true);
                 $js = '<script type="text/javascript">'.$js.'</script>';
-                $output = preg_replace('|<head>.*?|is', '<head>'.$js.'$1', $output, 1, $count);
+                $output = preg_replace('|<head>(.*?)<\/head>|is', '<head>'.$js.'$1</head>', $output, 1, $count);
+                if (!$count) {
+                    $output = preg_replace('|(<script)|is', $js.'$1', $output, 1);
+                }
             }
             // END Patch
-
-            $output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count) . $this->develbar_output();
+            $output = preg_replace('|</body>.*?</html>|is', '', $output, -1, $count) . $develBarOutput;
 
             if ($count > 0) {
                 $output .= '</body></html>';
