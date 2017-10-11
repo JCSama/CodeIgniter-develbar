@@ -13,7 +13,7 @@
                     echo '<span class="right-col" style="margin-left:20px;'.$border.'">';
                     foreach ($hook as $key => $value) {
                         echo '<span class="left-col" style="width:30%">' . $key . ':</span>';
-                        echo '<span class="right-col" style="width:70%">' . $value . '</span>';
+                        echo '<span class="right-col" style="width:70%">' . (!is_array($value) ? $value : var_dump($value)) . '</span>';
                     }
 
                     echo '</span>';

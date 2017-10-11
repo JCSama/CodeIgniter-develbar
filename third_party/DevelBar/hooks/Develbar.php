@@ -405,7 +405,11 @@ class Develbar
             }
 
             foreach ($_hooks as $hook) {
-                if (class_exists($hook['class']) && get_class($this) != $hook['class']) {
+                if (!array_key_exists('class', $hook)) {
+                    $hooks[$hook_point][] = $hook;
+                    $total_hooks++;
+                }
+                elseif (class_exists($hook['class']) && get_class($this) != $hook['class']) {
                     $hooks[$hook_point][] = $hook;
                     $total_hooks++;
                 }
