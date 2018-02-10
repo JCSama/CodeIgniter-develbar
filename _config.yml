@@ -1,0 +1,8 @@
+title: CodeIgniter Developer Toolbar
+description: 
+google_analytics: UA-61610618-1
+show_downloads: true
+theme: jekyll-theme-midnight
+
+gems:
+  - jekyll-mentions
