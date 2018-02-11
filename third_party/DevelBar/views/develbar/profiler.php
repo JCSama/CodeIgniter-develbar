@@ -16,7 +16,7 @@
     }
     .ci-toolbar-tabs li a{ color:#90949f; display:block; padding:14px 40px; text-decoration:none; border-right:4px solid transparent }
     .ci-toolbar-tabs li a.ajax{ background:url("<?php echo $profiler['ajax_requests']['icon'] ?>") no-repeat 10px center  }
-    .ci-toolbar-tabs li a.database{ background:url("<?php echo $profiler['database']['icon'] ?>") no-repeat 10px center  }
+    .ci-toolbar-tabs li a.database{ background:url("<?php echo isset($profiler['database']) ? $profiler['database']['icon'] : '' ?>") no-repeat 10px center  }
     .ci-toolbar-tabs li a.models{ background:url("<?php echo $profiler['models']['icon'] ?>") no-repeat 10px center  }
     .ci-toolbar-tabs li a.helpers{ background:url("<?php echo $profiler['helpers']['icon'] ?>") no-repeat 10px center  }
     .ci-toolbar-tabs li a.libraries{ background:url("<?php echo $profiler['libraries']['icon'] ?>") no-repeat 10px center  }
@@ -42,7 +42,9 @@
 <div class="ci-toolbar-tabs">
     <ul>
         <li class="active"><a href="#" class="ajax"><?php echo lang('ajax_requests') ?></a></li>
-        <li class=""><a href="#" class="database"><?php echo lang('database') ?></a></li>
+        <?php if(isset($profiler['database'])) : ?>
+            <li><a href="#" class="database"><?php echo lang('database') . ' <span id="count_db_queries"></span>' ?></a></li>
+        <?php endif; ?>
         <li><a href="#" class="models"><?php echo lang('models') . ' ('.count($profiler['models']['models']).')' ?></a></li>
         <li><a href="#" class="helpers"><?php echo lang('helpers') . ' ('.count($profiler['helpers']['helpers']).')' ?></a></li>
         <li><a href="#" class="libraries"><?php echo lang('libraries') . ' ('.count($profiler['libraries']['loaded_libraries']).')' ?></a></li>
@@ -84,38 +86,43 @@
             </tr>
             </thead>
             <tbody>
+            <?php if(isset($profiler['database'])): ?>
             <?php $dbs = $profiler['database']['dbs']; ?>
             <?php if(count($dbs)): ?>
                 <?php
                 $global_execution_time = 0;
+                $count_queries = 0;
                 foreach ($dbs as $name => $db):?>
                     <tr>
-                    <?php if (count($db->queries)): ?>
+                    <?php if (count($db['queries'])): ?>
                         <?php
                         $total_execution_time = 0;
-                        foreach ($db->queries as $key => $query) {
-                            $time = number_format($db->query_times[$key], 4);
+                        foreach ($db['queries'] as $key => $query) {
+                            $time = number_format($db['query_times'][$key], 4);
                             $highlight = array('SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'LEFT&nbsp;JOIN', 'ORDER&nbsp;BY', 'GROUP&nbsp;BY', 'LIMIT', 'INSERT', 'INTO', 'VALUES', 'UPDATE', 'OR&nbsp;', 'HAVING', 'OFFSET', 'NOT&nbsp;IN', 'IN', 'LIKE', 'NOT&nbsp;LIKE', 'COUNT', 'MAX', 'MIN', 'ON', 'AS', 'AVG', 'SUM', '(', ')');
                             foreach ($highlight as $bold) {
                                 $query = str_replace($bold, '<strong style="color:#e0e0e0">'.$bold.'</strong>', $query);
                             }
                             echo '
-                            <td>'.$db->hostname.'</td>
-                            <td>'.$db->database.'</td>
+                            <td>'.$db['hostname'].'</td>
+                            <td>'.$db['database'].'</td>
                             <td>'.$query.'</td>
                             <td style="text-align:right">' . $time . '</td>';
-                            $total_execution_time = array_sum($db->query_times);
+                            $total_execution_time = array_sum($db['query_times']);
                             $global_execution_time += $total_execution_time;
+                            ++$count_queries;
                         }
                         ?>
                     <?php else: ?>
-                        <td><?php echo $db->hostname ?></td>
-                        <td><?php echo $db->database ?></td>
+                        <td><?php echo $db['hostname'] ?></td>
+                        <td><?php echo $db['database'] ?></td>
                         <td><?php echo lang('no_queries') ?></td>
                         <td style="text-align:right"></td>
                     <?php endif ?>
                     </tr>
                 <?php endforeach ?>
+                <span style="display: none;" id="count_queries"><?php echo $count_queries ?></span>
+            <?php endif; ?>
             </tbody>
             <?php if ($global_execution_time > 0): ?>
                 <tfoot>
@@ -212,6 +219,8 @@
                 this.parentNode.className = 'active';
             }, false);
         }
+        var dbQueries = document.getElementById('count_queries').textContent;
+        document.getElementById('count_db_queries').textContent = ' ('+ dbQueries + ')';
     </script>
 <?php endif; ?>
 </body>

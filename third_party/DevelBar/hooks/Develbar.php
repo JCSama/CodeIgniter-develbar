@@ -38,7 +38,7 @@ class Develbar
     /**
      * DevelBar version
      */
-    const VERSION = '1.1';
+    const VERSION = '1.2';
 
     /**
      * Supported CI version
@@ -365,12 +365,26 @@ class Develbar
                 if ($cobject instanceof CI_DB) {
                     $controller = &get_instance();
                     if ($controller instanceof CI_Controller) {
-                        $dbs[get_class($this->CI) . ':$' . $name] = $cobject;
+                        $database = array(
+                            'database' => $cobject->database,
+                            'hostname' => $cobject->hostname,
+                            'queries' => $cobject->queries,
+                            'query_times' => $cobject->query_times,
+                            'query_count' => $cobject->query_count,
+                        );
+                        $dbs[get_class($this->CI) . ':$' . $name] = $database;
                     }
                 } elseif ($cobject instanceof CI_Model) {
                     foreach (get_object_vars($cobject) as $mname => $mobject) {
                         if ($mobject instanceof CI_DB) {
-                            $dbs[get_class($cobject) . ':$' . $mname] = $mobject;
+                            $database = array(
+                                'database' => $mobject->database,
+                                'hostname' => $mobject->hostname,
+                                'queries' => $mobject->queries,
+                                'query_times' => $mobject->query_times,
+                                'query_count' => $mobject->query_count,
+                            );
+                            $dbs[get_class($cobject) . ':$' . $mname] = $database;
                         }
                     }
                 }
@@ -403,7 +417,6 @@ class Develbar
             if (!isset($_hooks[0])) {
                 $_hooks = array($_hooks);
             }
-
             foreach ($_hooks as $hook) {
                 if (!array_key_exists('class', $hook)) {
                     $hooks[$hook_point][] = $hook;
@@ -414,7 +427,6 @@ class Develbar
                     $total_hooks++;
                 }
             }
-
         }
 
         $data = array(

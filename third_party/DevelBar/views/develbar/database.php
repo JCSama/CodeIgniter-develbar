@@ -6,12 +6,12 @@
     <?php
     $global_execution_time = 0;
     foreach ($dbs as $name => $db):
-        if (count($db->queries)) {
-            echo '-' . $db->hostname . '#' . lang('database') . ' : ' . $db->database . '<br/>';
+        if (count($db['queries'])) {
+            echo '-' . $db['hostname'] . '#' . lang('database') . ' : ' . $db['database'] . '<br/>';
             $total_execution_time = 0;
             echo '<div class="scrolls">';
-            foreach ($db->queries as $key => $query) {
-                $time = number_format($db->query_times[$key], 4);
+            foreach ($db['queries'] as $key => $query) {
+                $time = number_format($db['query_times'][$key], 4);
                 $highlight = array('SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'LEFT&nbsp;JOIN', 'ORDER&nbsp;BY', 'GROUP&nbsp;BY', 'LIMIT', 'INSERT', 'INTO', 'VALUES', 'UPDATE', 'OR&nbsp;', 'HAVING', 'OFFSET', 'NOT&nbsp;IN', 'IN', 'LIKE', 'NOT&nbsp;LIKE', 'COUNT', 'MAX', 'MIN', 'ON', 'AS', 'AVG', 'SUM', '(', ')');
                 //$query = highlight_code($query);
                 foreach ($highlight as $bold) {
@@ -23,7 +23,7 @@
                     <span class="right-col">' . $time . ' ' .lang('sec') .'</span>
                 </p>';
             }
-            $total_execution_time = array_sum($db->query_times);
+            $total_execution_time = array_sum($db['query_times']);
             $global_execution_time += $total_execution_time;
             echo '
             </div>

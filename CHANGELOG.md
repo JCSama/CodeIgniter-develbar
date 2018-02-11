@@ -1,3 +1,15 @@
+## 1.2 (2017-01-18)
+
+Fix:
+
+- Profiling database not possible when using PDO
+
+## 1.1 (2017-01-18)
+
+Fix:
+
+- Profiler link not visible on ajax pannel (JS Error)
+
 ## 1.0 (2017-03-21)
 
 Changes:
