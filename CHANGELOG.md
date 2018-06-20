@@ -1,3 +1,9 @@
+## 1.2.1 (2018-06-20)
+
+Fix:
+
+- Hooks, Allow Closure usage.
+
 ## 1.2 (2017-01-18)
 
 Fix:
