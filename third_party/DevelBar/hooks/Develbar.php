@@ -38,7 +38,7 @@ class Develbar
     /**
      * DevelBar version
      */
-    const VERSION = '1.2';
+    const VERSION = '1.2.1';
 
     /**
      * Supported CI version
@@ -414,6 +414,11 @@ class Develbar
         $hooks = array();
 
         foreach ($this->CI->hooks->hooks as $hook_point => $_hooks) {
+            if (is_callable($_hooks)) {
+                $hooks[$hook_point][] = 'Closure';
+                $total_hooks++;
+                continue;
+            }
             if (!isset($_hooks[0])) {
                 $_hooks = array($_hooks);
             }

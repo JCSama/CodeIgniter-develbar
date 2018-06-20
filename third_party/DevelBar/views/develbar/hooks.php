@@ -11,9 +11,15 @@
                 foreach($hooks as $key => $hook) {
                     $border = $key == count($hooks)-1 ? '' : 'border-bottom:1px solid #57595E';
                     echo '<span class="right-col" style="margin-left:20px;'.$border.'">';
-                    foreach ($hook as $key => $value) {
-                        echo '<span class="left-col" style="width:30%">' . $key . ':</span>';
-                        echo '<span class="right-col" style="width:70%">' . (!is_array($value) ? $value : var_dump($value)) . '</span>';
+                    if($hook == 'Closure'){
+                        echo '<span class="left-col" style="width:30%">&nbsp;</span>';
+                        echo '<span class="right-col" style="width:70%">' . $hook . '</span>';
+                    }
+                    else {
+                        foreach ($hook as $key => $value) {
+                            echo '<span class="left-col" style="width:30%">' . $key . ':</span>';
+                            echo '<span class="right-col" style="width:70%">' . (!is_array($value) ? $value : var_dump($value)) . '</span>';
+                        }
                     }
 
                     echo '</span>';
