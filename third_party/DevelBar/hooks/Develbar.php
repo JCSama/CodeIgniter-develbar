@@ -414,17 +414,19 @@ class Develbar
         $hooks = array();
 
         foreach ($this->CI->hooks->hooks as $hook_point => $_hooks) {
-            if (!isset($_hooks[0])) {
-                $_hooks = array($_hooks);
-            }
-            foreach ($_hooks as $hook) {
-                if (!array_key_exists('class', $hook)) {
-                    $hooks[$hook_point][] = $hook;
-                    $total_hooks++;
+            if (is_array($_hooks)) {
+                if (!isset($_hooks[0])) {
+                    $_hooks = array($_hooks);
                 }
-                elseif (class_exists($hook['class']) && get_class($this) != $hook['class']) {
-                    $hooks[$hook_point][] = $hook;
-                    $total_hooks++;
+                foreach ($_hooks as $hook) {
+                    if (!array_key_exists('class', $hook)) {
+                        $hooks[$hook_point][] = $hook;
+                        $total_hooks++;
+                    }
+                    elseif (class_exists($hook['class']) && get_class($this) != $hook['class']) {
+                        $hooks[$hook_point][] = $hook;
+                        $total_hooks++;
+                    }
                 }
             }
         }
