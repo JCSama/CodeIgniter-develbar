@@ -33,7 +33,7 @@
             </p>';
         }
         else{
-            echo '-' . $db->hostname . '#' . lang('database') . ' : ' . $db->database .' : ' . lang('no_queries').'<br/>';
+            echo '-' . $db['hostname'] . '#' . lang('database') . ' : ' . $db['database'] .' : ' . lang('no_queries').'<br/>';
         }
         ?>
     <?php endforeach ?>
