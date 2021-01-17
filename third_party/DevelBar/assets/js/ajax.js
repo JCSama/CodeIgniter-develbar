@@ -1,1 +1,251 @@
-CIjs=function(){"use strict";var j,a=function(a,b){return a.className.match(new RegExp("\\b"+b+"\\b"))},b=function(a,b){a.className=a.className.replace(new RegExp("\\b"+b+"\\b")," ")},c=function(b,c){a(b,c)||(b.className+=" "+c)},d=[],e=4,f=0,g=function(){var a=document.querySelector(".ci-toolbar-ajax-requests");if(a){a.textContent="("+d.length+")",a.className="ci-toolbar-ajax-requests";var g=document.querySelector(".ci-toolbar-ajax-info");g&&(g.textContent=d.length+" AJAX request"+(d.length>1?"s":""));var h=document.querySelector(".ci-toolbar-block-ajax");d.length?c(h.parentNode,"active"):b(h.parentNode,"active"),f>0?c(h,"ci-ajax-request-loading"):e<4?(c(h,"ci-toolbar-status-red"),b(h,"ci-ajax-request-loading")):(b(h,"ci-ajax-request-loading"),b(h,"ci-toolbar-status-red"))}},h=function(a){var b=d[a];f++;var c=document.createElement("tr");b.DOMNode=c;var e=document.querySelector(".ci-toolbar-ajax-request-list");if(e){var h=document.createElement("td");h.textContent=b.method,c.appendChild(h);var i=document.createElement("td"),j=document.createElement("span");j.textContent="-",i.appendChild(j),c.appendChild(i);var k=document.createElement("td");if(k.className="ci-ajax-request-url","GET"===b.method){var l=document.createElement("a");l.setAttribute("href",b.url),l.setAttribute("target","_blank"),l.textContent=b.url.split("?")[0],k.appendChild(l)}else k.textContent=b.url;k.setAttribute("title",b.url),c.appendChild(k);var m=document.createElement("td");m.className="ci-ajax-request-duration",m.textContent="-",c.appendChild(m);var n=document.createElement("td");n.className="ci-ajax-profiler-url",""!=b.profiler&&(profilerLink.textContent="profiler",n.appendChild(n)),c.appendChild(n),c.className="ci-ajax-request ci-ajax-request-loading",e.insertBefore(c,e.firstChild),g()}},i=function(a){var b=d[a];f--;var c=b.DOMNode,h=c.children[0],i=c.children[1],j=i.children[0],k=c.children[3],l=c.children[4];if(b.error?(c.className="ci-ajax-request ci-ajax-request-error",h.className="ci-ajax-request-error",e=0):(c.className="ci-ajax-request ci-ajax-request-ok",e++),b.statusCode&&(b.statusCode<300?j.setAttribute("class","ci-toolbar-status"):b.statusCode<400?j.setAttribute("class","ci-toolbar-status ci-toolbar-status-yellow"):j.setAttribute("class","ci-toolbar-status ci-toolbar-status-red"),j.textContent=b.statusCode),b.duration&&(k.textContent=b.duration+"ms"),b.profiler){var m=document.createElement("a");m.setAttribute("href",cidvl_siteurl + "develbarprofiler/profil/"+b.profiler),m.setAttribute("target","_blank"),m.textContent="profiler",l.appendChild(m)}g()};if(j="addEventListener"in document.createElement("div")?function(a,b,c){a.addEventListener(b,c,!1)}:function(a,b,c){a.attachEvent("on"+b,c)},window.fetch&&void 0===window.fetch.polyfill){var l=window.fetch;window.fetch=function(){var a=l.apply(this,arguments),b=arguments[0],c=arguments[1];"[object Request]"===Object.prototype.toString.call(arguments[0])&&(b=arguments[0].url,c={method:arguments[0].method,credentials:arguments[0].credentials,headers:arguments[0].headers,mode:arguments[0].mode,redirect:arguments[0].redirect});var f="GET";c&&void 0!==c.method&&(f=c.method);var g={error:!1,url:b,method:f,type:"fetch",start:new Date},j=d.push(g)-1;return a.then(function(a){g.duration=new Date-g.start,g.error=a.status<200||a.status>=400,g.statusCode=a.status,i(j)},function(a){g.error=!0}),h(j),a}}if(window.XMLHttpRequest&&XMLHttpRequest.prototype.addEventListener){var m=XMLHttpRequest.prototype.open,n=0;XMLHttpRequest.prototype.open=function(a,b,c,e,f){var g=this,j={error:!1,url:b,method:a,profiler:"",start:new Date};n=d.push(j)-1,this.addEventListener("readystatechange",function(){4==g.readyState&&(j.duration=new Date-j.start,j.error=g.status<200||g.status>=400,j.statusCode=g.status,j.profiler=g.getResponseHeader("X-CI-Toolbar-Profiler"),i(n))},!1),h(n),m.apply(this,Array.prototype.slice.call(arguments))}}return{hasClass:a,removeClass:b,addClass:c,addEventListener:j,renderAjaxRequests:g}}(),CIjs.addEventListener(window,"load",function(){CIjs.renderAjaxRequests()});
+CIjs = (function () {
+    "use strict";
+
+    var hasClass = function (el, cssClass) {
+        return el.className.match(new RegExp('\\b' + cssClass + '\\b'));
+    };
+    var removeClass = function (el, cssClass) {
+        el.className = el.className.replace(new RegExp('\\b' + cssClass + '\\b'), ' ');
+    };
+    var addClass = function (el, cssClass) {
+        if (!hasClass(el, cssClass)) {
+            el.className += " " + cssClass;
+        }
+    };
+    var requestStack = [];
+
+    var successStreak = 4;
+    var pendingRequests = 0;
+    var renderAjaxRequests = function () {
+        var requestCounter = document.querySelector('.ci-toolbar-ajax-requests');
+        if (!requestCounter) {
+            return;
+        }
+        requestCounter.textContent = '(' + requestStack.length + ')';
+        requestCounter.className = 'ci-toolbar-ajax-requests';
+
+        var infoSpan = document.querySelector(".ci-toolbar-ajax-info");
+        if (infoSpan) {
+            infoSpan.textContent = requestStack.length + ' AJAX request' + (requestStack.length > 1 ? 's' : '');
+        }
+
+        var ajaxToolbarPanel = document.querySelector('.ci-toolbar-block-ajax');
+        if (requestStack.length) {
+            addClass(ajaxToolbarPanel.parentNode, 'active');
+        } else {
+            removeClass(ajaxToolbarPanel.parentNode, 'active');
+        }
+        if (pendingRequests > 0) {
+            addClass(ajaxToolbarPanel, 'ci-ajax-request-loading');
+        } else if (successStreak < 4) {
+            addClass(ajaxToolbarPanel, 'ci-toolbar-status-red');
+            removeClass(ajaxToolbarPanel, 'ci-ajax-request-loading');
+        } else {
+            removeClass(ajaxToolbarPanel, 'ci-ajax-request-loading');
+            removeClass(ajaxToolbarPanel, 'ci-toolbar-status-red');
+        }
+    };
+
+    var startAjaxRequest = function (index) {
+        var request = requestStack[index];
+        pendingRequests++;
+        var row = document.createElement('tr');
+        request.DOMNode = row;
+
+        var tbody = document.querySelector('.ci-toolbar-ajax-request-list');
+
+        if (!tbody) {
+            return;
+        }
+
+        var methodCell = document.createElement('td');
+        methodCell.textContent = request.method;
+        row.appendChild(methodCell);
+
+        var statusCodeCell = document.createElement('td');
+        var statusCode = document.createElement('span');
+        statusCode.textContent = '-';
+        statusCodeCell.appendChild(statusCode);
+        row.appendChild(statusCodeCell);
+
+        var pathCell = document.createElement('td');
+        pathCell.className = 'ci-ajax-request-url';
+        if ('GET' === request.method) {
+            var pathLink = document.createElement('a');
+            pathLink.setAttribute('href', request.url);
+            pathLink.setAttribute('target', '_blank');
+            pathLink.textContent = request.url.split('?')[0];
+            pathCell.appendChild(pathLink);
+        } else {
+            pathCell.textContent = request.url;
+        }
+        pathCell.setAttribute('title', request.url);
+        row.appendChild(pathCell);
+
+        var durationCell = document.createElement('td');
+        durationCell.className = 'ci-ajax-request-duration';
+        durationCell.textContent = '-';
+        row.appendChild(durationCell);
+
+        var profilerCell = document.createElement('td');
+        profilerCell.className = 'ci-ajax-profiler-url';
+        if ('' != request.profiler) {
+            profilerLink.textContent = 'profil';
+            profilerCell.appendChild(profilerCell);
+        }
+
+        row.appendChild(profilerCell);
+
+        row.className = 'ci-ajax-request ci-ajax-request-loading';
+        tbody.insertBefore(row, tbody.firstChild);
+        renderAjaxRequests();
+    };
+
+    var finishAjaxRequest = function (index) {
+        var request = requestStack[index];
+        pendingRequests--;
+        var row = request.DOMNode;
+        var methodCell = row.children[0];
+        var statusCodeCell = row.children[1];
+        var statusCodeElem = statusCodeCell.children[0];
+        var durationCell = row.children[3];
+        var profilerCell = row.children[4];
+
+        if (request.error) {
+            row.className = 'ci-ajax-request ci-ajax-request-error';
+            methodCell.className = 'ci-ajax-request-error';
+            successStreak = 0;
+        } else {
+            row.className = 'ci-ajax-request ci-ajax-request-ok';
+            successStreak++;
+        }
+
+        if (request.statusCode) {
+            if (request.statusCode < 300) {
+                statusCodeElem.setAttribute('class', 'ci-toolbar-status');
+            } else if (request.statusCode < 400) {
+                statusCodeElem.setAttribute('class', 'ci-toolbar-status ci-toolbar-status-yellow');
+            } else {
+                statusCodeElem.setAttribute('class', 'ci-toolbar-status ci-toolbar-status-red');
+            }
+            statusCodeElem.textContent = request.statusCode;
+        }
+
+        if (request.duration) {
+            durationCell.textContent = request.duration + 'ms';
+        }
+
+        if (request.profiler) {
+            var profilerLink = document.createElement('a');
+            profilerLink.setAttribute('href', '/index.php/develbarprofiler/profil/' + request.profiler);
+            profilerLink.setAttribute('target', '_blank');
+            profilerLink.textContent = 'profil';
+            profilerCell.appendChild(profilerLink);
+        }
+
+        renderAjaxRequests();
+    };
+
+    var addEventListener;
+
+    var el = document.createElement('div');
+    if (!('addEventListener' in el)) {
+        addEventListener = function (element, eventName, callback) {
+            element.attachEvent('on' + eventName, callback);
+        };
+    } else {
+        addEventListener = function (element, eventName, callback) {
+            element.addEventListener(eventName, callback, false);
+        };
+    }
+
+    if (window.fetch && window.fetch.polyfill === undefined) {
+        var oldFetch = window.fetch;
+        window.fetch = function () {
+            var promise = oldFetch.apply(this, arguments);
+            var url = arguments[0];
+            var params = arguments[1];
+            var paramType = Object.prototype.toString.call(arguments[0]);
+            if (paramType === '[object Request]') {
+                url = arguments[0].url;
+                params = {
+                    method: arguments[0].method,
+                    credentials: arguments[0].credentials,
+                    headers: arguments[0].headers,
+                    mode: arguments[0].mode,
+                    redirect: arguments[0].redirect
+                };
+            }
+            var method = 'GET';
+            if (params && params.method !== undefined) {
+                method = params.method;
+            }
+
+            var stackElement = {
+                error: false,
+                url: url,
+                method: method,
+                type: 'fetch',
+                start: new Date()
+            };
+
+            var idx = requestStack.push(stackElement) - 1;
+            promise.then(function (r) {
+                stackElement.duration = new Date() - stackElement.start;
+                stackElement.error = r.status < 200 || r.status >= 400;
+                stackElement.statusCode = r.status;
+                finishAjaxRequest(idx);
+            }, function (e) {
+                stackElement.error = true;
+            });
+            startAjaxRequest(idx);
+
+            return promise;
+        };
+    }
+
+    if (window.XMLHttpRequest && XMLHttpRequest.prototype.addEventListener) {
+        var proxied = XMLHttpRequest.prototype.open;
+        var idx = 0;
+
+        XMLHttpRequest.prototype.open = function (method, url, async, user, pass) {
+            var self = this;
+
+            var stackElement = {
+                error: false,
+                url: url,
+                method: method,
+                profiler: '',
+                start: new Date()
+            };
+
+            idx = requestStack.push(stackElement) - 1;
+
+            this.addEventListener('readystatechange', function () {
+                if (self.readyState == 4) {
+                    stackElement.duration = new Date() - stackElement.start;
+                    stackElement.error = self.status < 200 || self.status >= 400;
+                    stackElement.statusCode = self.status;
+                    stackElement.profiler = self.getResponseHeader('X-CI-Toolbar-Profiler');
+
+                    finishAjaxRequest(idx);
+                }
+            }, false);
+
+            startAjaxRequest(idx);
+            proxied.apply(this, Array.prototype.slice.call(arguments));
+        };
+    }
+
+    return {
+        hasClass: hasClass,
+        removeClass: removeClass,
+        addClass: addClass,
+        addEventListener: addEventListener,
+        renderAjaxRequests: renderAjaxRequests
+    };
+})();
+
+CIjs.addEventListener(window, 'load', function () {
+    CIjs.renderAjaxRequests();
+});

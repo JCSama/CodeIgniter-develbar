@@ -2,7 +2,7 @@
 
 CodeIgniter Developer Toolbar is a third party library based on Profiler Library with additional functionality for debugging and optimization.
 
-- Support Multilanguage.
+- Support CI.2 and CI.3
 - Support HMVC.
 
 # Screen-shot
@@ -12,17 +12,13 @@ CodeIgniter Developer Toolbar is a third party library based on Profiler Library
 
 # Installation
 
-CodeIgniter Versoin >= 2.2.0
-
 Copy the files to the `application/third_party/DevelBar` folder.
 
 Copy the file `core/MY_Loader.php` to the `application/core` folder.
 
 Copy the file `controllers/develbarprofiler.php` to the `application/controllers` folder.
 
-Change application/cache folder permission to 777
-
-Notice : You may need to add <head> tag in your html page for AJAX Panel.
+Change permissions for cache folder `chmod 777 application/cache`
 
 # For HMVC
 
@@ -54,7 +50,7 @@ $hook['display_override'][] = array(
 );
 ```
 
-Open `application/third_party/DevelBar/config/config.php` :
+Enable or disable Develbar, open `application/third_party/DevelBar/config/config.php` :
 
 ```php
 $config['enable_develbar'] = TRUE;
@@ -72,14 +68,14 @@ $config['develbar_sections'] = array(
     'Memory Usage'	   	=> TRUE,
     'Request'   		=> TRUE,
     'Database'			=> TRUE,
-    'Hooks'				=> FALSE, // Disable Hooks Section
+    'Hooks'			=> FALSE, // Disable Hooks Section
     'Libraries'			=> TRUE,
     'Helpers' 			=> FALSE, // Disable Helpers Section,
     'Views' 			=> TRUE,
     'Config' 			=> TRUE,
     'Session' 			=> TRUE,
     'Models' 			=> TRUE,
-    'Ajax'                      > TRUE,
+    'Ajax'                      => TRUE,
 );
 ```
 To auto check for available new version of CodeIgniter and DeveloperToolbar, you should set `check_update` option to `TRUE`,
@@ -88,5 +84,3 @@ within `application/third_party/DevelBar/config/config.php` :
 ```php
 $config['check_update'] = TRUE;
 ```
-
-NOTE : if this option is set to TRUE, it will slow down the page loading a little bit.
