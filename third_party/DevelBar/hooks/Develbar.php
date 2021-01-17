@@ -2,32 +2,9 @@
 /**
  * Class DevelBar
  *
- * This content is released under the MIT License (MIT)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
  * @package    DevelBar
- * @author    Mohamed ES-SAHLI
- * @license    http://opensource.org/licenses/MIT	MIT License
+ * @author    Mohamed ES-SAHLI | simoessahli@gmail.com
  * @link    https://github.com/JCSama/CodeIgniter-develbar
- * @since    Version 0.1
- * @filesource
  */
 defined('BASEPATH') or die('No direct script access.');
 
@@ -38,12 +15,12 @@ class Develbar
     /**
      * DevelBar version
      */
-    const VERSION = '1.2.1';
+    const VERSION = '1.2.2';
 
     /**
      * Supported CI version
      */
-    const SUPPORTED_CI_VERSION = '2.2.0';
+    const SUPPORTED_CI_VERSION = '3.0';
 
     /**
      * @var object
@@ -164,7 +141,7 @@ class Develbar
                 sprintf($this->CI->lang->line('version_not_supported'), anchor($this->default_options['ci_website'])));
         }
 
-        if ($this->CI->input->is_cli_request()) {
+        if (is_cli()) {
             $this->CI->output->_display();
 
             return;
@@ -234,7 +211,7 @@ class Develbar
         $profiler['helpers'] = $this->helpers_section(false);
         $profiler['libraries'] = $this->libraries_section(false);
         $profiler['config'] = $this->config_section(false);
-        $profilerId = uniqid();
+        $profilerId = uniqid('', true);
 
         $this->CI->cache->save($profilerId, $profiler, $develbarConfig['profiler_key_expiration_time']);
 
@@ -337,8 +314,8 @@ class Develbar
         $data = array(
             'icon' => image_base64_encode($this->assets_folder . 'images/setting.png'),
             'method' => ($method = strtolower($_SERVER['REQUEST_METHOD'])),
-            'controller' => $this->CI->router->fetch_class(),
-            'action' => $this->CI->router->fetch_method(),
+            'controller' => $this->CI->router->class,
+            'action' => $this->CI->router->method,
             'parameters' => $this->CI->input->{$method}(),
         );
 
@@ -583,7 +560,6 @@ class Develbar
     {
         $data = array(
             'icon' => $data['icon'] = image_base64_encode($this->assets_folder . 'images/ajax.png'),
-            //'js' => $this->CI->load->file($this->assets_folder . 'js/ajax.js', true),
         );
 
         return $this->CI->load->view($this->view_folder . 'ajax', $data, true);
