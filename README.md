@@ -2,7 +2,7 @@
 
 CodeIgniter Developer Toolbar is a third party library based on Profiler Library with additional functionality for debugging and optimization.
 
-- Support Multilanguage.
+- Support CI.2 and CI.3
 - Support HMVC.
 
 # Screen-shot
@@ -11,8 +11,6 @@ CodeIgniter Developer Toolbar is a third party library based on Profiler Library
 ![Alt text](https://raw.githubusercontent.com/JCSama/CodeIgniter-develbar/gh-pages/images/Screen-Shot-develbar-profiler.png "Developer Toolbar Profiler")
 
 # Installation
-
-Support CI.2 and CI.3
 
 Copy the files to the `application/third_party/DevelBar` folder.
 
